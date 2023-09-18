@@ -27,46 +27,6 @@
                     <span>الفواتير</span>
                 </p>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
-                    {{-- <li class="nav-item dropdown">
-                    <a href="#ui-elements" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                        <i class="fe fe-box fe-16"></i>
-                        <span class="ml-3 item-text">UI elements</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Colors</span>
-                        </a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-typograpy.html"><span class="ml-1 item-text">Typograpy</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-icons.html"><span class="ml-1 item-text">Icons</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-buttons.html"><span class="ml-1 item-text">Buttons</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-notification.html"><span class="ml-1 item-text">Notifications</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-modals.html"><span class="ml-1 item-text">Modals</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-tabs-accordion.html"><span class="ml-1 item-text">Tabs & Accordion</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-progress.html"><span class="ml-1 item-text">Progress</span></a>
-                        </li>
-                    </ul>
-                    </li>
-                    <li class="nav-item w-100">
-                    <a class="nav-link" href="widgets.html">
-                        <i class="fe fe-layers fe-16"></i>
-                        <span class="ml-3 item-text">Widgets</span>
-                        <span class="badge badge-pill badge-primary">New</span>
-                    </a>
-                    </li> --}}
                     <li class="nav-item dropdown">
                     <a href="#forms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                         <i class="fe fe-credit-card fe-16"></i>
@@ -93,23 +53,7 @@
                         </li>
                     </ul>
                     </li>
-                    {{-- <li class="nav-item dropdown">
-                    <a href="#tables" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                        <i class="fe fe-grid fe-16"></i>
-                        <span class="ml-3 item-text">Tables</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="tables">
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./table_basic.html"><span class="ml-1 item-text">Basic Tables</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./table_advanced.html"><span class="ml-1 item-text">Advanced Tables</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./table_datatables.html"><span class="ml-1 item-text">Data Tables</span></a>
-                        </li>
-                    </ul>
-                    </li> --}}
+                    {{-- Reborts  --}}
                     <li class="nav-item dropdown">
                     <a href="#charts" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                         <i class="fe fe-pie-chart fe-16"></i>
@@ -130,6 +74,7 @@
                         </li>
                     </ul>
                     </li>
+                    {{-- Users --}}
                     <li class="nav-item dropdown">
                         <a href="#profile" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                             <i class="fe fe-user fe-16"></i>
@@ -142,16 +87,15 @@
                             <a class="nav-link pl-3" href="./profile-notification.html"><span class="ml-1">Notifications</span></a>
                         </ul>
                     </li>
+                    {{-- Settings --}}
                     <li class="nav-item dropdown">
                         <a href="#settings" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                             <i class="fe fe-tool fe-16"></i>
                             <span class="ml-3 item-text">الاعدادات</span>
                         </a>
-                        <ul class="collapse list-unstyled pl-4 w-100" id="settings">
-                            <a class="nav-link pl-3" href="./profile.html"><span class="ml-1">Overview</span></a>
+                        <ul class="collapse list-unstyled pl-4 w-100 {{ (request()->is('section*')) ? 'show' : '' }}" id="settings">
+                            <a class="nav-link pl-3" href="{{ route ('section.index') }}"><span class="ml-1">الاقسام</span></a>
                             <a class="nav-link pl-3" href="./profile-settings.html"><span class="ml-1">Settings</span></a>
-                            <a class="nav-link pl-3" href="./profile-security.html"><span class="ml-1">Security</span></a>
-                            <a class="nav-link pl-3" href="./profile-notification.html"><span class="ml-1">Notifications</span></a>
                         </ul>
                     </li>
                 </ul>

@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
     //Dashboard
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/', function () { return view('dashboard'); }) -> name('dashboard');
 
     //Sections
-    Route::controller(OrderController::class)->group(function () {
-        Route::get('/orders/{id}', 'show');
+    Route::controller(SectionController::class)->group(function () {
+        Route::get('/section/table', 'index') -> name('section.index');
         Route::post('/orders', 'store');
     });
 });
