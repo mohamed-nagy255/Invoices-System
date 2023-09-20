@@ -12,8 +12,7 @@
                         <h2 class="mb-2 page-title">جدول الاقسام</h2>
                     </div>
                     <div class="row justify-content-end m-2">
-                        <button type="button" class="btn mb-2 btn-primary add" data-toggle="modal" 
-                        data-target=".modal-right">
+                        <button type="button" class="btn mb-2 btn-primary" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo">
                             <i class="fe fe-plus-square fe-16"></i> اضافة قسم
                         </button>
                     </div>
