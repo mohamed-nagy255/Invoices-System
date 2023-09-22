@@ -23,7 +23,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Sections
     Route::controller(SectionController::class)->group(function () {
         Route::get('/section/table', 'index') -> name('section.index');
-        Route::post('/orders', 'store');
+        Route::post('/section/table/insert', 'store') -> name('section.store');
+        Route::post('/section/table/update', 'update') -> name('section.update');
+        Route::post('/section/table/destroy', 'destroy') -> name('section.destroy');
     });
 });
 
