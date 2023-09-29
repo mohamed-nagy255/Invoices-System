@@ -88,14 +88,14 @@
                         </ul>
                     </li>
                     {{-- Settings --}}
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{ (request()->is('setting*')) ? 'active' : '' }}">
                         <a href="#settings" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                             <i class="fe fe-tool fe-16"></i>
                             <span class="ml-3 item-text">الاعدادات</span>
                         </a>
-                        <ul class="collapse list-unstyled pl-4 w-100 {{ (request()->is('section*')) ? 'show' : '' }}" id="settings">
+                        <ul class="collapse list-unstyled pl-4 w-100 {{ (request()->is('setting*')) ? 'show' : '' }}" id="settings">
                             <a class="nav-link pl-3" href="{{ route ('section.index') }}"><span class="ml-1">الاقسام</span></a>
-                            <a class="nav-link pl-3" href="./profile-settings.html"><span class="ml-1">Settings</span></a>
+                            <a class="nav-link pl-3" href="{{ route ('product.index') }}"><span class="ml-1">المنتجات</span></a>
                         </ul>
                     </li>
                 </ul>

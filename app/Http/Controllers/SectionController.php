@@ -26,7 +26,6 @@ class SectionController extends Controller
         DB::table('sections') -> insert ([
             'section_name' => $request -> section_name,
             'description' => $request -> description,
-            'created_by' => Auth::user() -> name,
         ]);
         return redirect() -> route('section.index') -> with( 'add', 'تم اضافة القسم بنجاح');
     }
@@ -45,7 +44,6 @@ class SectionController extends Controller
         DB::table('sections') -> where('id', $id) -> update ([
             'section_name' => $request -> section_name,
             'description' => $request -> description,
-            'created_by' => Auth::user() -> name,
         ]);
         return redirect() -> route('section.index') -> with( 'edit', 'تم تعديل القسم بنجاح');
     }

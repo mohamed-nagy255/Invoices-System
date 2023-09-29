@@ -1,19 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -22,11 +12,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Sections
     Route::controller(SectionController::class)->group(function () {
-        Route::get('/section/table', 'index') -> name('section.index');
-        Route::post('/section/table/insert', 'store') -> name('section.store');
-        Route::post('/section/table/update', 'update') -> name('section.update');
-        Route::post('/section/table/destroy', 'destroy') -> name('section.destroy');
+        Route::get('/setting/section', 'index') -> name('section.index');
+        Route::post('/setting/section/insert', 'store') -> name('section.store');
+        Route::post('/setting/section/update', 'update') -> name('section.update');
+        Route::post('/setting/section/destroy', 'destroy') -> name('section.destroy');
     });
+
+    //Products
+    Route::controller(ProductController::class)->group(function () {
+        Route::get('/setting/Product', 'index') -> name('product.index');
+        Route::post('/setting/Product/insert', 'store') -> name('product.store');
+        Route::post('/setting/Product/update', 'update') -> name('product.update');
+        Route::post('/setting/Product/destroy', 'destroy') -> name('product.destroy');
+    });
+
 });
 
 Route::middleware('auth')->group(function () {
