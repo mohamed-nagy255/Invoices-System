@@ -27,31 +27,18 @@
                     <span>الفواتير</span>
                 </p>
                 <ul class="navbar-nav flex-fill w-100 mb-2">
-                    <li class="nav-item dropdown">
-                    <a href="#forms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
-                        <i class="fe fe-credit-card fe-16"></i>
-                        <span class="ml-3 item-text"> ادارة الفواتير</span>
-                    </a>
-                    <ul class="collapse list-unstyled pl-4 w-100" id="forms">
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_elements.html"><span class="ml-1 item-text">Basic Elements</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_advanced.html"><span class="ml-1 item-text">Advanced Elements</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_validation.html"><span class="ml-1 item-text">Validation</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_wizard.html"><span class="ml-1 item-text">Wizard</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_layouts.html"><span class="ml-1 item-text">Layouts</span></a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_upload.html"><span class="ml-1 item-text">File upload</span></a>
-                        </li>
-                    </ul>
+                    <li class="nav-item dropdown  {{ (request()->is('invoice*')) ? 'active' : '' }}">
+                        <a href="#forms" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                            <i class="fe fe-credit-card fe-16"></i>
+                            <span class="ml-3 item-text"> ادارة الفواتير</span>
+                        </a>
+                        <ul class="collapse list-unstyled pl-4 w-100  {{ (request()->is('invoice*')) ? 'show' : '' }}" id="forms" >
+                            <li class="nav-item">
+                                <a class="nav-link pl-3" href="{{ route('invoice.index') }}">
+                                    <span class="ml-1 item-text">قائمة الفواتير</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     {{-- Reborts  --}}
                     <li class="nav-item dropdown">
