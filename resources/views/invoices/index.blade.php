@@ -29,9 +29,9 @@
                         <button type="button" class="btn">
                             <span class="fe fe-refresh-ccw fe-16 text-muted"></span>
                         </button>
-                        <button type="button" class="btn">
+                        <a href="{{ route('invoice.insert') }}" type="button" class="btn">
                             <span class="fe fe-plus-square fe-16 text-muted"></span>
-                        </button>
+                        </a>
                     </div>
                     </div>
                     <!-- Slide Modal -->
