@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'جدول المنتجات')
+@section('title', 'قائمة المنتجات')
 @section('css')
         
 @endsection
@@ -7,14 +7,15 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <div class="row justify-content-start m-2 d-inline-block">
-                        <span>الاعدادات /</span>
-                        <h2 class="mb-2 page-title">جدول المنتجات</h2>
-                    </div>
-                    <div class="row justify-content-end m-2">
-                        <button type="button" class="btn mb-2 btn-primary" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo">
-                            <i class="fe fe-plus-square fe-16"></i> اضافة منتج
+                    <div class="row mb-4 items-align-center">
+                        <div class="col-md">
+                            <h2 class="h3 mb-3 page-title">قائمة المنتجات</h2>
+                        </div>
+                    <div class="col-md-auto ml-auto text-right">
+                        <button type="button" class="btn" data-toggle="modal" data-target="#varyModal" data-whatever="@mdo">
+                            <span class="fe fe-plus-square fe-16 text-muted"></span>
                         </button>
+                    </div>
                     </div>
 
                     {{-- Validathion --}}
