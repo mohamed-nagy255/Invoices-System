@@ -30,6 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Invoice
     Route::controller(InvoiceController::class)->group(function () {
         Route::get('/invoice/invoice_table', 'index') -> name('invoice.index');
+        Route::get('/section/{id}', 'getproducts');
         Route::get('/invoice/invoice_insert', 'insert') -> name('invoice.insert');
         Route::post('/invoice/invoice_store', 'store') -> name('invoice.store');
         Route::get('/invoice/invoice_edit', 'edit') -> name('invoice.edit');

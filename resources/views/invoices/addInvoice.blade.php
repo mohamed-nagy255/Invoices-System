@@ -51,11 +51,12 @@
             padding: 5px;
             background: #fff;
             border-radius: 10px;
-            border: 1px solid #555;
+            /* border: 1px solid #555; */
+            border: none;
         }
 
         input[type=file]::file-selector-button {
-            /* display: none; */
+            display: none;
             margin-right: 20px;
             border: none;
             background: #084cdf;
@@ -163,5 +164,29 @@
     </div> <!-- /. end-section -->
 @endsection
 @section('js')
+    <script>
+        $(document).ready(function() {
+            $('select[name="Section"]').on('change', function() {
+                var SectionId = $(this).val();
+                if (SectionId) {
+                    $.ajax({
+                        url: "{{ URL::to('section') }}/" + SectionId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $('select[name="product"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="product"]').append('<option value="' +
+                                    value + '">' + value + '</option>');
+                            });
+                        },
+                    });
 
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+
+        });
+    </script>
 @endsection
