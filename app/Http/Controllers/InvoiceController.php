@@ -30,4 +30,10 @@ class InvoiceController extends Controller
         $products = DB::table("products")->where("section_id", $id)->pluck("product_name", "id");
         return json_encode($products);
     }
+
+    //Insert Invoice In DataBase
+    public function store (request $request)
+    {
+        return $request;
+    }
 }

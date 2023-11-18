@@ -80,7 +80,8 @@
                     <strong class="card-title">اضافة فاتورة</strong>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="{{ route('invoice.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
                         {{-- ONE --}}
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -125,15 +126,26 @@
 
                         {{-- THREE --}}
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="inputName" class="control-label">مبلغ العمولة</label>
-                                <input type="text" class="form-control form-control-lg" id="Amount_Commission"
+                                <input type="text" class="form-control fc-datepicker" id="Amount_Commission"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     name="Amount_Commission" title="يرجي ادخال مبلغ العمولة ">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label for="inputName" class="control-label">الخصم</label>
-                                <input type="text" class="form-control form-control-lg" id="Discount" name="Discount"
-                                    title="يرجي ادخال مبلغ الخصم ">
+                                <input type="text" class="form-control fc-datepicker" id="Discount" name="Discount"
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                    value=0 title="يرجي ادخال مبلغ الخصم ">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputName" class="control-label">نسبة ضريبة القيمة المضافة</label>
+                                <select name="Rate_VAT" id="Rate_VAT" class="form-control" onchange="myFunction()">
+                                    <!--placeholder-->
+                                    <option value="" selected disabled>حدد نسبة الضريبة</option>
+                                    <option value=" 5%">5%</option>
+                                    <option value="10%">10%</option>
+                                </select>
                             </div>
                         </div>
 
@@ -154,7 +166,7 @@
                         <label>المرفقات</label>
                         <label for="images" class="drop-container" id="dropcontainer">
                             <span class="drop-title">* صيغة المرفق pdf, jpeg ,.jpg , png </span>
-                            <input type="file" id="images" accept=".pdf,.jpg, .png, image/jpeg, image/png">
+                            <input type="file" name="file_name" id="images" accept=".pdf,.jpg, .png, image/jpeg, image/png">
                         </label>
                         <button type="submit" class="btn btn-primary">حفظ الفاتورة</button>
                     </form>
@@ -188,5 +200,38 @@
             });
 
         });
+    </script>
+
+    <script>
+        function myFunction() {
+
+            var Amount_Commission = parseFloat(document.getElementById("Amount_Commission").value);
+            var Discount = parseFloat(document.getElementById("Discount").value);
+            var Rate_VAT = parseFloat(document.getElementById("Rate_VAT").value);
+            var Value_VAT = parseFloat(document.getElementById("Value_VAT").value);
+
+            var Amount_Commission2 = Amount_Commission - Discount;
+
+
+            if (typeof Amount_Commission === 'undefined' || !Amount_Commission) {
+
+                alert('يرجي ادخال مبلغ العمولة ');
+
+            } else {
+                var intResults = Amount_Commission2 * Rate_VAT / 100;
+
+                var intResults2 = parseFloat(intResults + Amount_Commission2);
+
+                sumq = parseFloat(intResults).toFixed(2);
+
+                sumt = parseFloat(intResults2).toFixed(2);
+
+                document.getElementById("Value_VAT").value = sumq;
+
+                document.getElementById("Total").value = sumt;
+
+            }
+
+        }
     </script>
 @endsection
