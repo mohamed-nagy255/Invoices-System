@@ -5,24 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Invoice extends Model
+class InvoiceDetails extends Model
 {
     use HasFactory;
-    protected $table = 'invoices';
+    protected $table = 'invoice_details';
     protected $fillable = [
+        'invoice_id',
         'invoice_number',
-        'invoice_Date',
-        'Due_date',
         'product',
-        'section_id',
-        'Amount_collection',
-        'Amount_Commission',
-        'Discount',
-        'Value_VAT',
-        'Rate_VAT',
-        'Total',
+        'Section',
         'Status',
         'Value_Status',
         'note',
+        'user',
     ];
 }

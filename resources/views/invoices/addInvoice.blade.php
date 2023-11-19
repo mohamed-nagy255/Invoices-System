@@ -166,7 +166,7 @@
                         <label>المرفقات</label>
                         <label for="images" class="drop-container" id="dropcontainer">
                             <span class="drop-title">* صيغة المرفق pdf, jpeg ,.jpg , png </span>
-                            <input type="file" name="file_name" id="images" accept=".pdf,.jpg, .png, image/jpeg, image/png">
+                            <input type="file" name="pic" id="images" accept=".pdf,.jpg, .png, image/jpeg, image/png">
                         </label>
                         <button type="submit" class="btn btn-primary">حفظ الفاتورة</button>
                     </form>

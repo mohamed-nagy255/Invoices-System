@@ -39,33 +39,45 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1573</td>
-                                        <td>2020-01-14 01:04:42</td>
-                                        <td>Bryar Reilly</td>
-                                        <td>(873) 448-3021</td>
-                                        <td>745-3818 Vitae, Ave</td>
-                                        <td>$2.06</td>
-                                        <td>Credit Card </td>
-                                        <td>$2.06</td>
-                                        <td>Credit Card </td>
-                                        <td>$2.06</td>
-                                        <td>Credit Card </td>
-                                        <td><span class="dot dot-lg bg-success mr-2"></span></td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-sm dropdown-toggle more-vertical" type="button"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="text-muted sr-only">Action</span>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#">Edit</a>
-                                                    <a class="dropdown-item" href="#">Remove</a>
-                                                    <a class="dropdown-item" href="#">Assign</a>
+                                    @php($id = 0)
+                                    @foreach ($invoices as $invoice)
+                                        <tr>
+                                            <td>{{ ++$id }}</td>
+                                            <td>{{ $invoice->invoice_number }}</td>
+                                            <td>{{ $invoice->invoice_date }}</td>
+                                            <td>{{ $invoice->Due_date }}</td>
+                                            <td>{{ $invoice->product }}</td>
+                                            <td>{{ $invoice->section_id }}</td>
+                                            <td>{{ $invoice->Discount }}</td>
+                                            <td>{{ $invoice->Rate_VAT }}</td>
+                                            <td>{{ $invoice->Value_VAT }}</td>
+                                            <td>{{ $invoice->Total }}</td>
+                                            <td>{{ $invoice->note }}</td>
+                                            <td>
+                                                @if ($invoice->Value_Status === 0)
+                                                    <span class="dot dot-lg bg-success mr-2"></span>
+                                                @elseif ($invoice->Value_Status === 2)
+                                                    <span class="dot dot-lg bg-warning mr-2"></span>
+                                                @else
+                                                    <span class="dot dot-lg bg-danger mr-2"></span>
+                                                @endif
+                                                    {{ $invoice->Status }}
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm dropdown-toggle more-vertical" type="button"
+                                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span class="text-muted sr-only">Action</span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" href="#">Edit</a>
+                                                        <a class="dropdown-item" href="#">Remove</a>
+                                                        <a class="dropdown-item" href="#">Assign</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
