@@ -70,8 +70,8 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Remove</a>
+                                                        <a class="dropdown-item" href="#">تعديل</a>
+                                                        <a class="dropdown-item" href="#">حذف</a>
                                                         <a class="dropdown-item" href="#">Assign</a>
                                                     </div>
                                                 </div>

@@ -76,6 +76,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow mb-4">
+                {{-- ADD --}}
+                @if (session()->has('add'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong> {{ session()->get('add') }} </strong>
+                        <i class="fe fe-check-circle fe-16"></i>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
                 <div class="card-header">
                     <strong class="card-title">اضافة فاتورة</strong>
                 </div>
@@ -166,7 +176,8 @@
                         <label>المرفقات</label>
                         <label for="images" class="drop-container" id="dropcontainer">
                             <span class="drop-title">* صيغة المرفق pdf, jpeg ,.jpg , png </span>
-                            <input type="file" name="pic" id="images" accept=".pdf,.jpg, .png, image/jpeg, image/png">
+                            <input type="file" name="pic" id="images"
+                                accept=".pdf,.jpg, .png, image/jpeg, image/png">
                         </label>
                         <button type="submit" class="btn btn-primary">حفظ الفاتورة</button>
                     </form>

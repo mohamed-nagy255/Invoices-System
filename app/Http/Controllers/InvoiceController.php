@@ -87,7 +87,7 @@ class InvoiceController extends Controller
             $request->pic->move(public_path('Attachments/' . $invoice_number), $imageName);
         }
 
-        return redirect() -> route('invoice.index') -> with('add', 'تم اضافة الفاتورة بنجاح');
+        return redirect() -> route('invoice.insert') -> with('add', 'تم اضافة الفاتورة بنجاح');
         // return $invoice_id;
     }
 }
