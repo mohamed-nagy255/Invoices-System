@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Invoice extends Model
 {
@@ -24,5 +26,12 @@ class Invoice extends Model
         'Status',
         'Value_Status',
         'note',
+        'Payment_Date',
     ];
+
+    public function sections(): BelongsTo
+    {
+        return $this->belongsTo(Section::class, 'section_id', 'id');
+    }
+
 }

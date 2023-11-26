@@ -47,12 +47,20 @@
                                             <td>{{ $invoice->invoice_date }}</td>
                                             <td>{{ $invoice->Due_date }}</td>
                                             <td>{{ $invoice->product }}</td>
-                                            <td>{{ $invoice->section_id }}</td>
+                                            <td>
+                                                <a href="{{ route('details.index',$invoice->section_id ) }}">{{ $invoice->sections->section_name }}</a>
+                                            </td>
                                             <td>{{ $invoice->Discount }}</td>
                                             <td>{{ $invoice->Rate_VAT }}</td>
                                             <td>{{ $invoice->Value_VAT }}</td>
                                             <td>{{ $invoice->Total }}</td>
-                                            <td>{{ $invoice->note }}</td>
+                                            <td>
+                                                @if ($invoice->note == null)
+                                                    لا يوجد ملاحظات
+                                                @else
+                                                    {{ $invoice->note }}
+                                                @endif
+                                            </td>
                                             <td>
                                                 @if ($invoice->Value_Status === 0)
                                                     <span class="dot dot-lg bg-success mr-2"></span>
@@ -61,7 +69,7 @@
                                                 @else
                                                     <span class="dot dot-lg bg-danger mr-2"></span>
                                                 @endif
-                                                    {{ $invoice->Status }}
+                                                {{ $invoice->Status }}
                                             </td>
                                             <td>
                                                 <div class="dropdown">

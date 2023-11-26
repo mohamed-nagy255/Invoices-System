@@ -5,6 +5,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\InvoiceDetailsController;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -36,6 +37,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/invoice/invoice_edit', 'edit') -> name('invoice.edit');
         Route::post('/invoice/invoice_update', 'update') -> name('invoice.update');
         Route::post('/invoice/invoice_destroy', 'destroy') -> name('invoice.destroy');
+    });
+
+    //Invoice Details
+    Route::controller(InvoiceDetailsController::class)->group(function () {
+        Route::get('/invoice_details/{id}', 'index') -> name('details.index');
     });
 
 });
