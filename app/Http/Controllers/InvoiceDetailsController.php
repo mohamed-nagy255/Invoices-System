@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use App\Models\InvoiceDetails;
+use App\Models\InvoiceAttachment;
 
 class InvoiceDetailsController extends Controller
 {
@@ -12,6 +13,7 @@ class InvoiceDetailsController extends Controller
     {
         $invoices = Invoice::where('id', $id)->first();
         $invoiceDetails = InvoiceDetails::where('invoice_id', $id)->get();
-        return view('invoices.invoiceDetails', compact('invoices', 'invoiceDetails'));
+        $invoiceAttachments = InvoiceAttachment::where('invoice_id', $id)->get();
+        return view('invoices.invoiceDetails', compact('invoices', 'invoiceDetails', 'invoiceAttachments'));
     }
 }

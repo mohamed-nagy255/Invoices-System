@@ -155,11 +155,39 @@
                                     </table>
                                 </div>
                                 <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                                    aria-labelledby="pills-contact-tab"> Anim pariatur cliche reprehenderit, enim eiusmod
-                                    high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat
-                                    skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon
-                                    tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda
-                                    shoreditch et. </div>
+                                    aria-labelledby="pills-contact-tab">
+                                    <table class="table datatables" id="dataTable-1">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>رقم الفاتورة</th>
+                                                <th>اسم المرفق</th>
+                                                <th>المستخدم</th>
+                                                <th>العمليات</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($invoiceAttachments as $row)
+                                                <tr>
+                                                    <td>{{ ++$i }}</td>
+                                                    <td>{{ $row->invoice_number }}</td>
+                                                    <td>{{ $row->file_name }}</td>
+                                                    <td>{{ $row->Created_by }}</td>
+                                                    <td>
+                                                        <a class="btn btn-outline-success btn-sm" href="" role="button"><i class="fas fa-eye"></i>&nbsp;
+                                                            عرض
+                                                        </a>
+
+                                                        <a class="btn btn-outline-info btn-sm" href="" role="button"><i class="fas fa-download"></i>&nbsp;
+                                                            تحميل
+                                                        </a>
+                                                        <button class="btn btn-outline-danger btn-sm">حذف</button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
