@@ -48,7 +48,7 @@
                                             <td>{{ $invoice->Due_date }}</td>
                                             <td>{{ $invoice->product }}</td>
                                             <td>
-                                                <a href="{{ route('details.index',$invoice->section_id ) }}">{{ $invoice->sections->section_name }}</a>
+                                                <a href="{{ route('details.index',$invoice->id ) }}">{{ $invoice->sections->section_name }}</a>
                                             </td>
                                             <td>{{ $invoice->Discount }}</td>
                                             <td>{{ $invoice->Rate_VAT }}</td>
@@ -77,10 +77,10 @@
                                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                    <div class="dropdown-menu dropdown-menu-left">
                                                         <a class="dropdown-item" href="#">تعديل</a>
                                                         <a class="dropdown-item" href="#">حذف</a>
-                                                        <a class="dropdown-item" href="#">Assign</a>
+                                                        <a class="dropdown-item" href="{{ route('details.index',$invoice->id ) }}">التفاصيل</a>
                                                     </div>
                                                 </div>
                                             </td>
