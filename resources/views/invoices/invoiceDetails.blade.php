@@ -174,11 +174,13 @@
                                                     <td>{{ $row->file_name }}</td>
                                                     <td>{{ $row->Created_by }}</td>
                                                     <td>
-                                                        <a class="btn btn-outline-success btn-sm" href="" role="button"><i class="fas fa-eye"></i>&nbsp;
+                                                        <a class="btn btn-outline-success btn-sm" href=""
+                                                            role="button"><i class="fas fa-eye"></i>&nbsp;
                                                             عرض
                                                         </a>
 
-                                                        <a class="btn btn-outline-info btn-sm" href="" role="button"><i class="fas fa-download"></i>&nbsp;
+                                                        <a class="btn btn-outline-info btn-sm" href=""
+                                                            role="button"><i class="fas fa-download"></i>&nbsp;
                                                             تحميل
                                                         </a>
                                                         <button class="btn btn-outline-danger btn-sm">حذف</button>
