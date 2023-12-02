@@ -18,6 +18,16 @@
                     </div> --}}
                 </div>
                 <div class="col-md-12 mb-4">
+                    {{-- DELETE ATTACHMENT --}}
+                    @if (session()->has('delete'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong> {{ session()->get('delete') }} </strong>
+                            <i class="fe fe-check-circle fe-16"></i>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <div class="card shadow">
                         <div class="card-body">
                             <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
@@ -122,7 +132,7 @@
                                                     <td>{{ ++$i }}</td>
                                                     <td>{{ $row->invoice_number }}</td>
                                                     <td>{{ $row->product }}</td>
-                                                    <td>{{ $row->Section }}</td>
+                                                    <td>{{ $invoices->sections->section_name }}</td>
                                                     <td>
                                                         @if ($row->Value_Status === 0)
                                                             <span class="dot dot-lg bg-success mr-2"></span>
@@ -160,8 +170,8 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>رقم الفاتورة</th>
                                                 <th>اسم المرفق</th>
+                                                <th>تاريخ الاضافة</th>
                                                 <th>المستخدم</th>
                                                 <th>العمليات</th>
                                             </tr>
@@ -170,20 +180,28 @@
                                             @foreach ($invoiceAttachments as $row)
                                                 <tr>
                                                     <td>{{ ++$i }}</td>
-                                                    <td>{{ $row->invoice_number }}</td>
                                                     <td>{{ $row->file_name }}</td>
+                                                    <td>{{ $row->created_at }}</td>
                                                     <td>{{ $row->Created_by }}</td>
                                                     <td>
-                                                        <a class="btn btn-outline-success btn-sm" href=""
+                                                        <a class="btn btn-outline-success btn-sm"
+                                                            href="{{ route('details.openfile', [$row->invoice_number, $row->file_name]) }}"
                                                             role="button"><i class="fas fa-eye"></i>&nbsp;
                                                             عرض
                                                         </a>
 
-                                                        <a class="btn btn-outline-info btn-sm" href=""
+                                                        <a class="btn btn-outline-info btn-sm"
+                                                            href="{{ route('details.download', [$row->invoice_number, $row->file_name]) }}"
                                                             role="button"><i class="fas fa-download"></i>&nbsp;
                                                             تحميل
                                                         </a>
-                                                        <button class="btn btn-outline-danger btn-sm">حذف</button>
+                                                        <a type="button" class="btn btn-outline-danger btn-sm"
+                                                            data-toggle="modal" data-target="#deleteModal"
+                                                            data-whatever="@mdo" data-id="{{ $row->id }}"
+                                                            data-file="{{ $row->file_name }}"
+                                                            data-invoice="{{ $row->invoice_number }}">
+                                                            حذف
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -197,7 +215,49 @@
             </div>
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
+
+    {{-- DELETE MODEEL --}}
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="varyModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="varyModalLabel">حذف المرفق</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{ route('details.destroy') }}" autocomplete="off">
+                        @csrf
+                        <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="invoice_number" id="invoice">
+                        <strong>هل انت متاكد من حذف هذا المرفق...؟ </strong>
+                        <br>
+                        <input type="text" name="file_name" id="file" readonly
+                            style="border: none; outline: none;font-size: 20px; text-align: end">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">اغلاق</button>
+                    <button type="submit" class="btn mb-2 btn-danger">حذف</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @section('js')
-
+    <script>
+        $('#deleteModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var file = button.data('file')
+            var invoice = button.data('invoice')
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #invoice').val(invoice);
+            modal.find('.modal-body #file').val(file);
+        })
+    </script>
 @endsection

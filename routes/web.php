@@ -42,6 +42,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Invoice Details
     Route::controller(InvoiceDetailsController::class)->group(function () {
         Route::get('/invoice_details/{id}', 'index') -> name('details.index');
+        Route::post('/invoice_details/delete_file', 'destroy') -> name('details.destroy');
+        Route::get('/view_file/{invoice_number}/{file_name}', 'open_file') -> name('details.openfile');
+        Route::get('/download_file/{invoice_number}/{file_name}', 'get_file') -> name('details.download');
     });
 
 });
