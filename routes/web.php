@@ -6,11 +6,14 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\InvoiceDetailsController;
+use App\Http\Controllers\InvoiceAttachmentController;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
     //Dashboard
-    Route::get('/', function () { return view('dashboard'); }) -> name('dashboard');
+    Route::get('/', function () { 
+        return view('dashboard'); 
+    }) -> name('dashboard');
 
     //Sections
     Route::controller(SectionController::class)->group(function () {
@@ -45,6 +48,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/invoice_details/delete_file', 'destroy') -> name('details.destroy');
         Route::get('/view_file/{invoice_number}/{file_name}', 'open_file') -> name('details.openfile');
         Route::get('/download_file/{invoice_number}/{file_name}', 'get_file') -> name('details.download');
+    });
+
+    //Invoice Attachments
+    Route::controller(InvoiceAttachmentController::class)->group(function () {
+        Route::post('invoice_details/insert_attachment', 'store')->name('attachment.store');
     });
 
 });

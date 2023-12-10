@@ -175,7 +175,7 @@
                         <p class="text-danger"></p>
                         <label>المرفقات</label>
                         <label for="images" class="drop-container" id="dropcontainer">
-                            <span class="drop-title">* صيغة المرفق pdf, jpeg ,.jpg , png </span>
+                            <span class=" text-danger drop-title">* صيغة المرفق pdf, jpeg ,.jpg , png </span>
                             <input type="file" name="pic" id="images"
                                 accept=".pdf,.jpg, .png, image/jpeg, image/png">
                         </label>
