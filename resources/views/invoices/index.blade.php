@@ -78,9 +78,9 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-left">
-                                                        <a class="dropdown-item" href="#">تعديل</a>
+                                                        <a class="dropdown-item" href="{{ route('invoice.edit', $invoice->id) }}">تعديل</a>
                                                         <a class="dropdown-item" href="#">حذف</a>
-                                                        <a class="dropdown-item" href="{{ route('details.index',$invoice->id ) }}">التفاصيل</a>
+                                                        <a class="dropdown-item" href="{{ route('details.index', $invoice->id ) }}">التفاصيل</a>
                                                     </div>
                                                 </div>
                                             </td>

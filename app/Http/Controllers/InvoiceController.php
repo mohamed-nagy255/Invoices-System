@@ -90,4 +90,18 @@ class InvoiceController extends Controller
         return redirect() -> route('invoice.insert') -> with('add', 'تم اضافة الفاتورة بنجاح');
         // return $invoice_id;
     }
+
+    // Edit Invoice
+    public function edit ($id)
+    {
+        $invoice = Invoice::where('id', $id) -> first();
+        $sections = Section::all();
+        return view('invoices.editInvoice', compact('invoice', 'sections'));
+    }
+
+    // Update Invoice 
+    public function update (request $request)
+    {
+        return $request;
+    }
 }
