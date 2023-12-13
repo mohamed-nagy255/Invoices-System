@@ -92,7 +92,7 @@
                 <div class="card-body">
                     <form action="{{ route('invoice.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
+                        <input type="hidden" name="id" value="{{ $invoice->id }}">
                         {{-- ONE --}}
                         <div class="form-row">
                             <div class="form-group col-md-4">

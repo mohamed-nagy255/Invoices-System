@@ -102,6 +102,22 @@ class InvoiceController extends Controller
     // Update Invoice 
     public function update (request $request)
     {
-        return $request;
+        // return $request;
+        $id = $request -> id;
+        Invoice::findOrFail($id) -> update([
+            'invoice_number' => $request->invoice_number,
+            'invoice_Date' => $request->invoice_Date,
+            'Due_date' => $request->Due_date,
+            'product' => $request->product,
+            'section_id' => $request->Section,
+            'Amount_collection' => $request->Amount_collection,
+            'Amount_Commission' => $request->Amount_Commission,
+            'Discount' => $request->Discount,
+            'Value_VAT' => $request->Value_VAT,
+            'Rate_VAT' => $request->Rate_VAT,
+            'Total' => $request->Total,
+            'note' => $request->note,
+        ]);
+        return redirect() -> back() -> with('edit', 'تم تعديل الفاتورة بنجاح');
     }
 }
