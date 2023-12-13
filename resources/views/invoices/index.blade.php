@@ -29,6 +29,7 @@
                                         <th>تاريخ الاستحقاق</th>
                                         <th>المنتج</th>
                                         <th>القسم</th>
+                                        <th>مبلغ التحصيل</th>
                                         <th>الخصم</th>
                                         <th>نسبة الضريبة</th>
                                         <th>قيمة الضريبة</th>
@@ -50,6 +51,7 @@
                                             <td>
                                                 <a href="{{ route('details.index',$invoice->id ) }}">{{ $invoice->sections->section_name }}</a>
                                             </td>
+                                            <td>{{ $invoice->Amount_collection }}</td>
                                             <td>{{ $invoice->Discount }}</td>
                                             <td>{{ $invoice->Rate_VAT }}</td>
                                             <td>{{ $invoice->Value_VAT }}</td>

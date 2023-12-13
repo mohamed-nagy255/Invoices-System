@@ -18,7 +18,7 @@ class ProductController extends Controller
     // Insert Data
     public function store (request $request) {
         $validated = $request->validate([
-            'product_name' => 'required|unique:products|max:255',
+            'product_name' => 'required|max:255',
             'section_id' => 'integer',
             'description' => 'nullable',
         ],[
@@ -44,7 +44,6 @@ class ProductController extends Controller
             'description' => 'nullable',
         ],[
             'product_name.required' => 'يجب ادخال اسم المنتج',
-            // 'product_name.unique' => 'اسم المنتج موجود بالفعل',
             'product_name.max' => 'اسم المنتج طويل للغاية',
             'section_id.integer' => 'يجب اختيار اسم القسم التابع لهذا المنتج',
         ]);
