@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\InvoiceDetails;
 use App\Models\InvoiceAttachment;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class InvoiceController extends Controller
 {
@@ -102,10 +103,11 @@ class InvoiceController extends Controller
     // Update Invoice 
     public function update (request $request)
     {
-        // return $request;
         $id = $request -> id;
+        $invoice_number = $request->invoice_number;
+
         Invoice::findOrFail($id) -> update([
-            'invoice_number' => $request->invoice_number,
+            'invoice_number' => $invoice_number,
             'invoice_Date' => $request->invoice_Date,
             'Due_date' => $request->Due_date,
             'product' => $request->product,
@@ -118,6 +120,29 @@ class InvoiceController extends Controller
             'Total' => $request->Total,
             'note' => $request->note,
         ]);
+
+        # Get Data Details & Attachment
+        $invoice_details = InvoiceDetails::where('invoice_id', $id) -> first('invoice_number');
+        $invoice_attachment = InvoiceAttachment::where('invoice_id', $id) -> first('invoice_number');
+
+        # check Invoive Number
+        if ($invoice_details != $invoice_number && $invoice_attachment != $invoice_number) {
+            # Update Details
+            InvoiceDetails::where('invoice_id', $id) -> update([
+                'invoice_number' => $invoice_number
+            ]);
+
+            # Update Attachment
+            InvoiceAttachment::where('invoice_id', $id) -> update([
+                'invoice_number' => $invoice_number
+            ]);
+            
+            # Update Folder Name
+            // $oldFolderName = public_path($invoice_attachment);
+            // $newFolderName = public_path($invoice_number);
+            // File::move('Attachments/' . $oldFolderName, $newFolderName);
+        } 
+        
         return redirect() -> back() -> with('edit', 'تم تعديل الفاتورة بنجاح');
     }
 }

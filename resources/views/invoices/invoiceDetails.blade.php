@@ -205,6 +205,7 @@
                                                 <tr>
                                                     <th>#</th>
                                                     <th>اسم المرفق</th>
+                                                    <th>رقم الفاتورة</th>
                                                     <th>تاريخ الاضافة</th>
                                                     <th>المستخدم</th>
                                                     <th>العمليات</th>
@@ -215,6 +216,7 @@
                                                     <tr>
                                                         <td>{{ ++$i }}</td>
                                                         <td>{{ $row->file_name }}</td>
+                                                        <td>{{ $row->invoice_number }}</td>
                                                         <td>{{ $row->created_at }}</td>
                                                         <td>{{ $row->Created_by }}</td>
                                                         <td>
