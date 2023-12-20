@@ -105,7 +105,8 @@ class InvoiceController extends Controller
     {
         $id = $request -> id;
         $invoice_number = $request->invoice_number;
-
+        
+        # Update Invoice
         Invoice::findOrFail($id) -> update([
             'invoice_number' => $invoice_number,
             'invoice_Date' => $request->invoice_Date,
@@ -122,8 +123,8 @@ class InvoiceController extends Controller
         ]);
 
         # Get Data Details & Attachment
-        $invoice_details = InvoiceDetails::where('invoice_id', $id) -> first('invoice_number');
-        $invoice_attachment = InvoiceAttachment::where('invoice_id', $id) -> first('invoice_number');
+        $invoice_details = InvoiceDetails::where('invoice_id', $id) -> first() -> invoice_number;
+        $invoice_attachment = InvoiceAttachment::where('invoice_id', $id) -> first() -> invoice_number;
 
         # check Invoive Number
         if ($invoice_details != $invoice_number && $invoice_attachment != $invoice_number) {
@@ -132,17 +133,22 @@ class InvoiceController extends Controller
                 'invoice_number' => $invoice_number
             ]);
 
+            # Update Folder Name
+            $oldFolderPath = public_path('Attachments/' . $invoice_attachment);
+            $newFolderPath = public_path('Attachments/' . $invoice_number);
+            if (isset($oldFolderPath)) {
+                rename($oldFolderPath, $newFolderPath);
+                // echo $oldFolderPath;
+                // die();
+            }
+
             # Update Attachment
             InvoiceAttachment::where('invoice_id', $id) -> update([
                 'invoice_number' => $invoice_number
-            ]);
-            
-            # Update Folder Name
-            // $oldFolderName = public_path($invoice_attachment);
-            // $newFolderName = public_path($invoice_number);
-            // File::move('Attachments/' . $oldFolderName, $newFolderName);
+            ]);            
         } 
-        
         return redirect() -> back() -> with('edit', 'تم تعديل الفاتورة بنجاح');
     }
+
+    
 }
