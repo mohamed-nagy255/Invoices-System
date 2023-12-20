@@ -18,6 +18,16 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    {{-- DELETE --}}
+                    @if (session()->has('delete'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong> {{ session()->get('delete') }} </strong>
+                            <i class="fe fe-check-circle fe-16"></i>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <div class="card shadow">
                         <div class="card-body">
                             <table class="table datatables" id="dataTable-1">
@@ -49,7 +59,8 @@
                                             <td>{{ $invoice->Due_date }}</td>
                                             <td>{{ $invoice->product }}</td>
                                             <td>
-                                                <a href="{{ route('details.index',$invoice->id ) }}">{{ $invoice->sections->section_name }}</a>
+                                                <a
+                                                    href="{{ route('details.index', $invoice->id) }}">{{ $invoice->sections->section_name }}</a>
                                             </td>
                                             <td>{{ $invoice->Amount_collection }}</td>
                                             <td>{{ $invoice->Discount }}</td>
@@ -80,9 +91,16 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-left">
-                                                        <a class="dropdown-item" href="{{ route('invoice.edit', $invoice->id) }}">تعديل</a>
-                                                        <a class="dropdown-item" href="#">حذف</a>
-                                                        <a class="dropdown-item" href="{{ route('details.index', $invoice->id ) }}">التفاصيل</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('invoice.edit', $invoice->id) }}">تعديل</a>
+                                                        <a type="button" class="dropdown-item" data-toggle="modal"
+                                                            data-target="#deleteModal" data-whatever="@mdo"
+                                                            data-id="{{ $invoice->id }}"
+                                                            data-invoice_number="{{ $invoice->invoice_number }}">
+                                                            حذف
+                                                        </a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('details.index', $invoice->id) }}">التفاصيل</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -96,6 +114,9 @@
             </div>
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
+
+    @include('invoices.deleteModalInvoice')
+
 @endsection
 @section('js')
     <script src='{{ asset('assets/js/jquery.dataTables.min.js') }}'></script>
@@ -108,5 +129,16 @@
                 [16, 32, 64, "All"]
             ]
         });
+    </script>
+    {{-- DELETE MODALE --}}
+    <script>
+        $('#deleteModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var invoice_number = button.data('invoice_number')
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #invoice_number').val(invoice_number);
+        })
     </script>
 @endsection

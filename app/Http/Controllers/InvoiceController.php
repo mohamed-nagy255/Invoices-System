@@ -150,5 +150,10 @@ class InvoiceController extends Controller
         return redirect() -> back() -> with('edit', 'تم تعديل الفاتورة بنجاح');
     }
 
-    
+    //SoftDelete Invoice
+    public function delete (request $request) {
+        $id = $request -> id;
+        Invoice::findOrFail($id) -> delete();
+        return redirect() -> back() -> with('delete', 'تم حذف الفاتورة بنجاح');
+    }
 }
