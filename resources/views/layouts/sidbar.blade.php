@@ -44,8 +44,23 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link pl-3" href="{{ route('invoice.index') }}">
+                                        <span class="ml-1 item-text"> الفواتير المدفوعة</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link pl-3" href="{{ route('invoice.index') }}">
+                                        <span class="ml-1 item-text"> الفواتير المدفوعة جزئا</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link pl-3" href="{{ route('invoice.index') }}">
+                                        <span class="ml-1 item-text"> الفواتير الغير المدفوعة</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link pl-3" href="{{ route('invoice.archive') }}">
-                                        <span class="ml-1 item-text">الارشيف</span>
+                                        <span class="ml-1 item-text">ارشيف الفواتير</span>
                                     </a>
                                 </li>
                             </ul>
