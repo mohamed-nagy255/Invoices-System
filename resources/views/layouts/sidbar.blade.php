@@ -43,6 +43,11 @@
                                         <span class="ml-1 item-text">قائمة الفواتير</span>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link pl-3" href="{{ route('invoice.archive') }}">
+                                        <span class="ml-1 item-text">الارشيف</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         {{-- Reborts  --}}

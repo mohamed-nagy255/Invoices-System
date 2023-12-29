@@ -49,8 +49,8 @@
                                         role="tab" aria-controls="pills-contact" aria-selected="false">المرفقات</a>
                                 </li>
                             </ul>
-                            {{-- TAB ONE --}}
                             <div class="tab-content mb-1" id="pills-tabContent">
+                                {{-- TAB ONE --}}
                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                     aria-labelledby="pills-home-tab">
                                     <table class="table table-striped" style="text-align:center">

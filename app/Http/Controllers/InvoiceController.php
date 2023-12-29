@@ -156,4 +156,47 @@ class InvoiceController extends Controller
         Invoice::findOrFail($id) -> delete();
         return redirect() -> back() -> with('delete', 'تم حذف الفاتورة بنجاح');
     }
+
+    //Invoice Archive
+    public function show () {
+        $invoices = Invoice::onlyTrashed() -> get();
+        return view('invoices.archiveInvoice', compact('invoices'));
+    }
+
+    //Archive recovery
+    public function recovery ($id) {
+        Invoice::where('id', $id) -> restore();
+        return redirect() -> back() -> with('done', 'تم استرجاع الفاتورة بنجاح');
+    }
+
+    //ForceDelete Invoice
+    public function destroy (request $request) {
+        $id = $request -> id;
+        $invoice_number = $request -> invoice_number;
+
+        #Delete Invoice Attachment
+        $dir_path = public_path('Attachments/' . $invoice_number);
+        if (is_dir($dir_path)) {
+            $file_names = InvoiceAttachment::where('invoice_id', $id) -> pluck('file_name') -> toArray();
+            foreach ($file_names as $file) {
+                $file_path = $dir_path . '/' . $file;
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+            $files_in_dir = scandir($dir_path);
+            if (count($files_in_dir) == 2) {
+                rmdir($dir_path);
+            }
+        }
+        InvoiceAttachment::where('invoice_id', $id) -> delete();
+
+        #Delete Invoice
+        Invoice::where('id', $id) -> forcedelete();
+
+        #Delete Invoice Details
+        InvoiceDetails::where('invoice_id', $id) -> delete();
+
+        return redirect() -> back() -> with('delete', 'تم حذف الفاتورة بنجاح');
+    }
 }

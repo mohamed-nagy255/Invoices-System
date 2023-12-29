@@ -40,6 +40,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/invoice/invoice_edit/{id}', 'edit') -> name('invoice.edit');
         Route::post('/invoice/invoice_update', 'update') -> name('invoice.update');
         Route::delete('/invoice/invoice_delete', 'delete') -> name('invoice.delete');
+        Route::get('/invoice/invoice_archive', 'show')->name('invoice.archive');
+        Route::get('/invoice/archive_recovery/{id}', 'recovery')->name('recovery.archive');
+        Route::delete('/invoice/invoice_destroy', 'destroy') -> name('invoice.destroy');
     });
 
     //Invoice Details
