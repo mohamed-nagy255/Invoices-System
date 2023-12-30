@@ -9300,9 +9300,11 @@ svg.navbar-brand-img {
 
 .navbar-light .navbar-nav .nav-link {
   color: #001a4e; }
-  .navbar-light .navbar-nav .nav-link:hover {
+  .navbar-light .navbar-nav .nav-link:hover, 
+  .nav-active {
     background: #f8f9fa;
-    color: #1b68ff; }
+    color: #1b68ff !important; 
+  }
 
 .navbar-dark .navbar-nav .nav-link {
   color: #f8f9fa; }

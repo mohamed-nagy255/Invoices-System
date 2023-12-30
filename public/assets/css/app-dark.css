@@ -9305,9 +9305,10 @@ svg.navbar-brand-img {
 
 .navbar-light .navbar-nav .nav-link {
   color: #dee2e6; }
-  .navbar-light .navbar-nav .nav-link:hover {
+  .navbar-light .navbar-nav .nav-link:hover,
+  .nav-active {
     background: #495057;
-    color: #1b68ff;
+    color: #1b68ff !important;
     border-radius: 0.2rem; }
 
 .navbar-dark .navbar-nav .nav-link {

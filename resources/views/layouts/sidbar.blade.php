@@ -39,7 +39,7 @@
                             <ul class="collapse list-unstyled pl-4 w-100  {{ request()->is('invoice*') ? 'show' : '' }}"
                                 id="forms">
                                 <li class="nav-item">
-                                    <a class="nav-link pl-3" href="{{ route('invoice.index') }}">
+                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table') ? 'nav-active' : '' }}" href="{{ route('invoice.index') }}">
                                         <span class="ml-1 item-text">قائمة الفواتير</span>
                                     </a>
                                 </li>
@@ -59,7 +59,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link pl-3" href="{{ route('invoice.archive') }}">
+                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_archive') ? 'nav-active' : '' }}" href="{{ route('invoice.archive') }}">
                                         <span class="ml-1 item-text">ارشيف الفواتير</span>
                                     </a>
                                 </li>
