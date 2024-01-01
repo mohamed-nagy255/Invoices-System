@@ -34,7 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Invoice
     Route::controller(InvoiceController::class)->group(function () {
-        Route::get('/invoice/invoice_table', 'index') -> name('invoice.index');
+        Route::get('/invoice/invoice_table/{id_page}', 'index') -> name('invoice.index');
         Route::get('/section/{id}', 'getproducts');
         Route::get('/invoice/invoice_insert', 'insert') -> name('invoice.insert');
         Route::post('/invoice/invoice_store', 'store') -> name('invoice.store');
@@ -42,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/invoice/invoice_update', 'update') -> name('invoice.update');
         Route::delete('/invoice/invoice_destroy', 'destroy') -> name('invoice.destroy');
         Route::get('/invoice/invoice_payment/{id}', 'show') -> name('invoice.show.payment');
+        Route::post('/invoice/update_payment', 'status_update') -> name('update.payment');
     });
 
     //Invoice Details

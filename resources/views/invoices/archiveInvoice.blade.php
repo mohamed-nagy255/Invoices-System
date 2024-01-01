@@ -9,7 +9,10 @@
             <div class="col-12">
                 <div class="row mb-4 items-align-center">
                     <div class="col-md">
-                        <h2 class="h3 mb-3 page-title">قائمة الفواتير المؤرشفة</h2>
+                        <h2 class="h3 mb-3 page-title">
+                            ادارة الفواتير
+                            <span class="fe-16 text-muted">/ ارشيف الفواتير</span>
+                        </h2>
                     </div>
                     <div class="col-md-auto ml-auto text-right">
                         {{-- <a href="" type="button" class="btn">
@@ -100,7 +103,7 @@
                                                             data-target="#deleteModal" data-whatever="@mdo"
                                                             data-id="{{ $invoice->id }}"
                                                             data-invoice_number="{{ $invoice->invoice_number }}">
-                                                             حذف الفاتورة
+                                                            حذف الفاتورة
                                                         </a>
                                                     </div>
                                                 </div>

@@ -12,9 +12,20 @@ use Illuminate\Support\Facades\File;
 
 class InvoiceController extends Controller
 {
-    public function index () {
-        $invoices = Invoice::all();
-        return view('invoices.index', compact('invoices'));
+    public function index ($id_page) {
+        if ($id_page == 'invoice_all') {
+            $invoices = Invoice::all();
+            return view('invoices.index', compact('invoices'));
+        } elseif ($id_page == 'paid_invoice') {
+            $invoices = Invoice::where('Value_Status', 0) -> get();
+            return view('invoices.index', compact('invoices'));
+        } elseif ($id_page == 'partpaid_invoice') {
+            $invoices = Invoice::where('Value_Status', 2) -> get();
+            return view('invoices.index', compact('invoices'));
+        } elseif ($id_page == 'unpaid_invoice') {
+            $invoices = Invoice::where('Value_Status', 1) -> get();
+            return view('invoices.index', compact('invoices'));
+        }
     }
 
     // Add Invoice Page 
@@ -180,5 +191,50 @@ class InvoiceController extends Controller
         $invoice = Invoice::where('id', $id) -> first();
         $sections = Section::all();
         return view('invoices.changePayment', compact('invoice', 'sections'));
+    }
+    public function status_update (request $request) {
+        $id = $request -> id;
+        $Payment_Date = $request->Payment_Date;
+        $invoices = Invoice::findOrFail($id);
+        // return $Payment_Date;
+        if ($request->Status === 'مدفوعة') {
+            $invoices->update([
+                'Value_Status' => 0,
+                'Status' => $request->Status,
+                'Payment_Date' => $Payment_Date,
+            ]);
+            InvoiceDetails::create([
+                'invoice_id' => $id,
+                'invoice_number' => $request->invoice_number,
+                'product' => $request->product,
+                'Section' => $request->Section,
+                'Status' => $request->Status,
+                'Value_Status' => 0,
+                'Payment_Date' => $Payment_Date,
+                'note' => $request->note,
+                'user' => Auth()->user()->name,
+            ]);
+            return redirect() -> back() -> with('pay', 'تم تغيير حالة دفع الفاتورة بنجاح');
+        } elseif ($request->Status === 'مدفوعة جزئياً') {
+            $invoices->update([
+                'Value_Status' => 2,
+                'Status' => $request->Status,
+                'Payment_Date' => $Payment_Date,
+            ]);
+            InvoiceDetails::create([
+                'invoice_id' => $id,
+                'invoice_number' => $request->invoice_number,
+                'product' => $request->product,
+                'Section' => $request->Section,
+                'Status' => $request->Status,
+                'Value_Status' => 2,
+                'Payment_Date' => $Payment_Date,
+                'note' => $request->note,
+                'user' => Auth()->user()->name,
+            ]);
+            return redirect() -> back() -> with('pay', 'تم تغيير حالة دفع الفاتورة بنجاح');
+        } else {
+            return redirect() -> back() -> with('not', ' لم يتم تغيير حالة دفع الفاتورة بنجاح');
+        }
     }
 }

@@ -1,96 +1,37 @@
 @extends('layouts.master')
 @section('title', 'تغيير حالة الدفع')
 @section('css')
-    {{-- <style>
-        .drop-container {
-            position: relative;
-            display: flex;
-            gap: 10px;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px dashed #555;
-            color: #444;
-            cursor: pointer;
-            transition: background .2s ease-in-out, border .2s ease-in-out;
-        }
-
-        .drop-container:hover {
-            background: #eee;
-            border-color: #111;
-        }
-
-        .drop-container:hover .drop-title {
-            color: #222;
-        }
-
-        .drop-title {
-            color: #444;
-            font-size: 20px;
-            font-weight: bold;
-            text-align: center;
-            transition: color .2s ease-in-out;
-        }
-
-        .drop-container.drag-active {
-            background: #eee;
-            border-color: #111;
-        }
-
-        .drop-container.drag-active .drop-title {
-            color: #222;
-        }
-
-        input[type=file] {
-            width: 350px;
-            max-width: 100%;
-            color: #444;
-            padding: 5px;
-            background: #fff;
-            border-radius: 10px;
-            /* border: 1px solid #555; */
-            border: none;
-        }
-
-        input[type=file]::file-selector-button {
-            display: none;
-            margin-right: 20px;
-            border: none;
-            background: #084cdf;
-            padding: 5px 10px;
-            border-radius: 10px;
-            color: #fff;
-            cursor: pointer;
-            transition: background .2s ease-in-out;
-        }
-
-        input[type=file]::file-selector-button:hover {
-            background: #0d45a5;
-        }
-    </style> --}}
+ 
 @endsection
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            {{-- ADD --}}
-            {{-- @if (session()->has('edit'))
+            {{-- done --}}
+            @if (session()->has('pay'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong> {{ session()->get('edit') }} </strong>
+                    <strong> {{ session()->get('pay') }} </strong>
                     <i class="fe fe-check-circle fe-16"></i>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-            @endif --}}
+            @endif
+            {{-- not --}}
+            @if (session()->has('not'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong> {{ session()->get('not') }} </strong>
+                    <i class="fe fe-check-circle fe-16"></i>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <div class="card shadow mb-4">
                 <div class="card-header">
                     <strong class="card-title">تغيير حالة الدفع</strong>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('invoice.update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('update.payment') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input readonly type="hidden" name="id" value="{{ $invoice->id }}">
                         {{-- ONE --}}
@@ -190,7 +131,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="inputName" class="control-label">الملاحظات</label>
-                                <textarea name="note" class="form-control" id="inputName" readonly>
+                                <textarea name="note" class="form-control" id="inputName">
 @if ($invoice->note == null)
 لا توجد ملاحظات@else{{ $invoice->note }}
 @endif
@@ -202,17 +143,17 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputName" class="control-label"> حالة الدفع</label>
-                                <select name="Section" class="form-control SlectBox">
+                                <select name="Status" class="form-control SlectBox">
                                     <!--placeholder-->
-                                    <option value="" selected>اختر حالة الدفع</option>
+                                    <option value="" selected>--اختر حالة الدفع--</option>
                                     <option value="مدفوعة جزئياً">مدفوعة جزئياً</option>
                                     <option value="مدفوعة">مدفوعة</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputName" class="control-label">الاجمالي شامل الضريبة</label>
-                                <input type="date" class="form-control" id="Total" name="Total"
-                                    value="">
+                                <label for="inputName" class="control-label">تاريخ الدفع</label>
+                                <input type="date" name="Payment_Date" class="form-control" id="Payment_Date" 
+                                    value="{{ date('Y-m-d') }}" required>
                             </div>
                         </div>
                         

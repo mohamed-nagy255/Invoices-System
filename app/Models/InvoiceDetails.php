@@ -16,6 +16,7 @@ class InvoiceDetails extends Model
         'Section',
         'Status',
         'Value_Status',
+        'Payment_Date',
         'note',
         'user',
     ];

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'قائمة المنتجات')
+@section('title', 'قائمة المنتاجات')
 @section('css')
 
 @endsection
@@ -9,12 +9,16 @@
             <div class="col-12">
                 <div class="row mb-4 items-align-center">
                     <div class="col-md">
-                        <h2 class="h3 mb-3 page-title">قائمة المنتجات</h2>
+                        <h2 class="h3 mb-3 page-title">
+                            الاعدادات
+                            <span class="fe-16 text-muted">/ المنتاجات</span>
+                        </h2>
                     </div>
                     <div class="col-md-auto ml-auto text-right">
                         <button type="button" class="btn" data-toggle="modal" data-target="#varyModal"
                             data-whatever="@mdo">
-                            <span class="fe fe-plus-square fe-16 text-muted"></span>
+                            اضافة منتج
+                            <span class="fe fe-plus-square fe-16 text-primary"></span>
                         </button>
                     </div>
                 </div>
@@ -99,19 +103,21 @@
                                                     @endif
                                                 </td>
                                                 <td style="color: white">
-                                                    <a type="button" class="btn btn-success" data-toggle="modal"
+                                                    <a type="button" class="btn" data-toggle="modal"
                                                         data-target="#editModal" data-whatever="@mdo"
                                                         data-id="{{ $row->id }}"
                                                         data-product_name="{{ $row->product_name }}"
                                                         data-section_id="{{ $row->section_id }}"
                                                         data-description="{{ $row->description }}">
                                                         <i class="fe fe-edit fe-16"></i>
+                                                        <span class="fe fe-edit fe-16 text-success"></span>
                                                     </a>
-                                                    <a type="button" class="btn btn-danger" data-toggle="modal"
+                                                    <a type="button" class="btn" data-toggle="modal"
                                                         data-target="#deleteModal" data-whatever="@mdo"
                                                         data-id="{{ $row->id }}"
                                                         data-product_name="{{ $row->product_name }}">
                                                         <i class="fe fe-trash fe-16"></i>
+                                                        <span class="fe fe-trash-2 fe-16 text-danger"></span>
                                                     </a>
                                                 </td>
                                             </tr>

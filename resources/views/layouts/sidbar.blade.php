@@ -39,25 +39,28 @@
                             <ul class="collapse list-unstyled pl-4 w-100  {{ request()->is('invoice*') ? 'show' : '' }}"
                                 id="forms">
                                 <li class="nav-item">
-                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table') ? 'nav-active' : '' }}
+                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/invoice_all') ? 'nav-active' : '' }}
                                         {{ request()->is('invoice/invoice_insert') ? 'nav-active' : '' }}
                                         {{ request()->is('invoice/invoice_payment*') ? 'nav-active' : '' }}"
-                                        href="{{ route('invoice.index') }}">
+                                        href="{{ route('invoice.index', $id_page = "invoice_all") }}">
                                         <span class="ml-1 item-text">قائمة الفواتير</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link pl-3" href="{{ route('invoice.index') }}">
+                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/paid_invoice') ? 'nav-active' : '' }}" 
+                                        href="{{ route('invoice.index', $id_page = "paid_invoice") }}">
                                         <span class="ml-1 item-text"> الفواتير المدفوعة</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link pl-3" href="{{ route('invoice.index') }}">
+                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/partpaid_invoice') ? 'nav-active' : '' }}" 
+                                        href="{{ route('invoice.index', $id_page = "partpaid_invoice") }}">
                                         <span class="ml-1 item-text"> الفواتير المدفوعة جزئا</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link pl-3" href="{{ route('invoice.index') }}">
+                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/unpaid_invoice') ? 'nav-active' : '' }}" 
+                                    href="{{ route('invoice.index', $id_page = "unpaid_invoice") }}">
                                         <span class="ml-1 item-text"> الفواتير الغير المدفوعة</span>
                                     </a>
                                 </li>
@@ -121,10 +124,10 @@
                             </a>
                             <ul class="collapse list-unstyled pl-4 w-100 {{ request()->is('setting*') ? 'show' : '' }}"
                                 id="settings">
-                                <a class="nav-link pl-3" href="{{ route('section.index') }}"><span
+                                <a class="nav-link pl-3 {{ request()->is('setting/section') ? 'nav-active' : '' }}" href="{{ route('section.index') }}"><span
                                         class="ml-1">الاقسام</span></a>
-                                <a class="nav-link pl-3" href="{{ route('product.index') }}"><span
-                                        class="ml-1">المنتجات</span></a>
+                                <a class="nav-link pl-3 {{ request()->is('setting/Product') ? 'nav-active' : '' }}" href="{{ route('product.index') }}"><span
+                                        class="ml-1">المنتاجات</span></a>
                             </ul>
                         </li>
                     </ul>

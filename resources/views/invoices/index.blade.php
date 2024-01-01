@@ -9,11 +9,25 @@
             <div class="col-12">
                 <div class="row mb-4 items-align-center">
                     <div class="col-md">
-                        <h2 class="h3 mb-3 page-title">قائمة الفواتير</h2>
+                        <h2 class="h3 mb-3 page-title">
+                            ادارة الفواتير
+                            <span class="fe-16 text-muted">
+                                @if (request()->is('invoice/invoice_table/invoice_all'))
+                                    / قائمة الفواتير
+                                @elseif (request()->is('invoice/invoice_table/paid_invoice'))
+                                / الفواتير المدفوعة
+                                @elseif (request()->is('invoice/invoice_table/partpaid_invoice'))
+                                / الفواتير المدفوعة جزئياٌ
+                                @elseif (request()->is('invoice/invoice_table/unpaid_invoice'))
+                                / الفواتير الغير المدفوعة
+                                    
+                                @endif
+                            </span>
+                        </h2>
                     </div>
                     <div class="col-md-auto ml-auto text-right">
                         <a href="{{ route('invoice.insert') }}" type="button" class="btn">
-                            <span class="fe fe-plus-square fe-16 text-muted"></span>
+                            اضافة فاتورة <span class="fe fe-plus-square fe-16 text-primary"></span>
                         </a>
                     </div>
                 </div>
@@ -103,27 +117,31 @@
                                                     <div class="dropdown-menu dropdown-menu-left">
                                                         <a class="dropdown-item"
                                                             href="{{ route('invoice.edit', $invoice->id) }}">
-                                                            تعديل
+                                                            تعديل <span class="fe fe-edit fe-16 text-success "></span>
                                                         </a>
                                                         <a class="dropdown-item"
                                                             href="{{ route('invoice.show.payment', $invoice->id) }}">
-                                                            تغير حالة الدفع
+                                                            تغير حالة الدفع <span
+                                                                class="fe fe-target fe-16 text-success "></span>
                                                         </a>
                                                         <a type="button" class="dropdown-item" data-toggle="modal"
                                                             data-target="#archiveModal" data-whatever="@mdo"
                                                             data-id="{{ $invoice->id }}"
                                                             data-invoice_number="{{ $invoice->invoice_number }}">
-                                                            ارشفة الفاتورة
+                                                            ارشفة الفاتورة <span
+                                                                class="fe fe-layers fe-16 text-success "></span>
                                                         </a>
                                                         <a class="dropdown-item"
                                                             href="{{ route('details.index', $invoice->id) }}">
-                                                            التفاصيل
+                                                            المعلومات <span
+                                                                class="fe fe-package fe-16 text-success "></span>
                                                         </a>
                                                         <a type="button" class="dropdown-item" data-toggle="modal"
                                                             data-target="#deleteModal" data-whatever="@mdo"
                                                             data-id="{{ $invoice->id }}"
                                                             data-invoice_number="{{ $invoice->invoice_number }}">
-                                                            حذف الفاتورة
+                                                            حذف الفاتورة <span
+                                                                class="fe fe-trash-2 fe-16 text-danger "></span>
                                                         </a>
                                                     </div>
                                                 </div>

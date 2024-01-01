@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'تفاصيل الفاتورة')
+@section('title', 'معلومات الفاتورة')
 @section('css')
 
 @endsection
@@ -9,7 +9,7 @@
             <div class="col-12">
                 <div class="row mb-4 items-align-center">
                     <div class="col-md">
-                        <h2 class="h3 mb-3 page-title">تفاصيل الفاتورة</h2>
+                        <h2 class="h3 mb-3 page-title">معلومات الفاتورة</h2>
                     </div>
                 </div>
                 <div class="col-md-12 mb-4">
@@ -161,7 +161,7 @@
                                                         @if ($row->note == null)
                                                             لا يوجد ملاحظات
                                                         @else
-                                                            {{ $invoice->note }}
+                                                            {{ $row->note }}
                                                         @endif
                                                     </td>
                                                     <td>{{ $row->created_at }}</td>
