@@ -12,15 +12,13 @@ use Illuminate\Support\Facades\File;
 
 class InvoiceController extends Controller
 {
-    public function index () 
-    {
+    public function index () {
         $invoices = Invoice::all();
         return view('invoices.index', compact('invoices'));
     }
 
     // Add Invoice Page 
-    public function insert () 
-    {
+    public function insert () {
         $sections = Section::all();
         return view('invoices.addInvoice', compact('sections'));
     }
@@ -30,15 +28,13 @@ class InvoiceController extends Controller
     Get Producct's Section In AJAX
     ============================== 
     */
-    public function getproducts ($id)
-    {
+    public function getproducts ($id) {
         $products = DB::table("products")->where("section_id", $id)->pluck("product_name", "id");
         return json_encode($products);
     }
 
     //Insert Invoice In DataBase
-    public function store (request $request)
-    {
+    public function store (request $request) {
         // return $request;
         Invoice::create([
             'invoice_number' => $request->invoice_number,
@@ -82,19 +78,16 @@ class InvoiceController extends Controller
             $attachments->Created_by = Auth()->user()->name;
             $attachments->invoice_id = $invoice_id;
             $attachments->save();
-
             // move pic
             $imageName = $request->pic->getClientOriginalName();
             $request->pic->move(public_path('Attachments/' . $invoice_number), $imageName);
         }
-
         return redirect() -> route('invoice.insert') -> with('add', 'تم اضافة الفاتورة بنجاح');
         // return $invoice_id;
     }
 
     // Edit Invoice
-    public function edit ($id)
-    {
+    public function edit ($id) {
         $invoice = Invoice::where('id', $id) -> first();
         $sections = Section::all();
         return view('invoices.editInvoice', compact('invoice', 'sections'));
@@ -121,18 +114,15 @@ class InvoiceController extends Controller
             'Total' => $request->Total,
             'note' => $request->note,
         ]);
-
         # Get Data Details & Attachment
         $invoice_details = InvoiceDetails::where('invoice_id', $id) -> first() -> invoice_number;
         $invoice_attachment = InvoiceAttachment::where('invoice_id', $id) -> first() -> invoice_number;
-
         # check Invoive Number
         if ($invoice_details != $invoice_number && $invoice_attachment != $invoice_number) {
             # Update Details
             InvoiceDetails::where('invoice_id', $id) -> update([
                 'invoice_number' => $invoice_number
             ]);
-
             # Update Folder Name
             $oldFolderPath = public_path('Attachments/' . $invoice_attachment);
             $newFolderPath = public_path('Attachments/' . $invoice_number);
@@ -141,7 +131,6 @@ class InvoiceController extends Controller
                 // echo $oldFolderPath;
                 // die();
             }
-
             # Update Attachment
             InvoiceAttachment::where('invoice_id', $id) -> update([
                 'invoice_number' => $invoice_number
@@ -150,53 +139,46 @@ class InvoiceController extends Controller
         return redirect() -> back() -> with('edit', 'تم تعديل الفاتورة بنجاح');
     }
 
-    //SoftDelete Invoice
-    public function delete (request $request) {
-        $id = $request -> id;
-        Invoice::findOrFail($id) -> delete();
-        return redirect() -> back() -> with('delete', 'تم حذف الفاتورة بنجاح');
-    }
-
-    //Invoice Archive
-    public function show () {
-        $invoices = Invoice::onlyTrashed() -> get();
-        return view('invoices.archiveInvoice', compact('invoices'));
-    }
-
-    //Archive recovery
-    public function recovery ($id) {
-        Invoice::where('id', $id) -> restore();
-        return redirect() -> back() -> with('done', 'تم استرجاع الفاتورة بنجاح');
-    }
-
-    //ForceDelete Invoice
+    //Delete OR Archive Invoice
     public function destroy (request $request) {
         $id = $request -> id;
         $invoice_number = $request -> invoice_number;
+        $del_id = $request -> del_id;
 
-        #Delete Invoice Attachment
-        $dir_path = public_path('Attachments/' . $invoice_number);
-        if (is_dir($dir_path)) {
-            $file_names = InvoiceAttachment::where('invoice_id', $id) -> pluck('file_name') -> toArray();
-            foreach ($file_names as $file) {
-                $file_path = $dir_path . '/' . $file;
-                if (file_exists($file_path)) {
-                    unlink($file_path);
+        if ($del_id != "archive") {
+            #Delete Invoice Attachment
+            $dir_path = public_path('Attachments/' . $invoice_number);
+            if (is_dir($dir_path)) {
+                $file_names = InvoiceAttachment::where('invoice_id', $id) -> pluck('file_name') -> toArray();
+                foreach ($file_names as $file) {
+                    $file_path = $dir_path . '/' . $file;
+                    if (file_exists($file_path)) {
+                        unlink($file_path);
+                    }
+                }
+                $files_in_dir = scandir($dir_path);
+                if (count($files_in_dir) == 2) {
+                    rmdir($dir_path);
                 }
             }
-            $files_in_dir = scandir($dir_path);
-            if (count($files_in_dir) == 2) {
-                rmdir($dir_path);
-            }
+            InvoiceAttachment::where('invoice_id', $id) -> delete();
+            #Delete Invoice
+            Invoice::where('id', $id) -> forcedelete();
+            #Delete Invoice Details
+            InvoiceDetails::where('invoice_id', $id) -> delete();
+            return redirect() -> back() -> with('delete', 'تم حذف الفاتورة بنجاح');
+        } else {
+            Invoice::findOrFail($id) -> delete();
+            return redirect() -> back() -> with('archive', 'تم ارشفة الفاتورة بنجاح');
         }
-        InvoiceAttachment::where('invoice_id', $id) -> delete();
+    }
 
-        #Delete Invoice
-        Invoice::where('id', $id) -> forcedelete();
-
-        #Delete Invoice Details
-        InvoiceDetails::where('invoice_id', $id) -> delete();
-
-        return redirect() -> back() -> with('delete', 'تم حذف الفاتورة بنجاح');
+    ################################
+    ######## Change Payment ########
+    ################################
+    public function show ($id) {
+        $invoice = Invoice::where('id', $id) -> first();
+        $sections = Section::all();
+        return view('invoices.changePayment', compact('invoice', 'sections'));
     }
 }

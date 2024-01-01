@@ -8,13 +8,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{ route('invoice.delete') }}" autocomplete="off">
+                <form method="POST" action="{{ route('invoice.destroy') }}" autocomplete="off">
                     @csrf
                     @method('delete')
                     <input type="hidden" name="id" id="id">
                     <strong>هل انت متاكد من حذف هذه الفاتورة...؟ </strong>
                     <br>
-                    <input type="text" id="invoice_number" readonly
+                    <input type="text" name="invoice_number" id="invoice_number" readonly
                         style="border: none; outline: none;font-size: 20px; text-align: end">
             </div>
             <div class="modal-footer">

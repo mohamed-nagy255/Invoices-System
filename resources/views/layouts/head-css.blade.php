@@ -17,4 +17,27 @@
         <!-- App CSS -->
         <link rel="stylesheet" href="{{ asset('assets/css/app-light.css') }}" id="lightTheme">
         <link rel="stylesheet" href="{{ asset('assets/css/app-dark.css') }}" id="darkTheme" disabled>
+        <style>
+            /* width */
+            ::-webkit-scrollbar {
+            width: 3px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px rgba(255, 255, 255, 0); 
+            border-radius: 10px;
+            }
+            
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+            background: #1b68ff; 
+            border-radius: 10px;
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+            background: #1b67ff98; 
+            }
+        </style>
         @yield('css')

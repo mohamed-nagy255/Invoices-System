@@ -93,12 +93,14 @@
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-left">
                                                         <a class="dropdown-item"
-                                                            href="{{ route('recovery.archive', $invoice->id) }}">استرجاع</a>
+                                                            href="{{ route('recovery.archive', $invoice->id) }}">
+                                                            الغاء الارشفة
+                                                        </a>
                                                         <a type="button" class="dropdown-item" data-toggle="modal"
                                                             data-target="#deleteModal" data-whatever="@mdo"
                                                             data-id="{{ $invoice->id }}"
                                                             data-invoice_number="{{ $invoice->invoice_number }}">
-                                                             حذف نهائي
+                                                             حذف الفاتورة
                                                         </a>
                                                     </div>
                                                 </div>
@@ -114,7 +116,7 @@
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
 
-    @include('invoices.forceDeleteModalInvoice')
+    @include('invoices.deleteModalInvoice')
 
 @endsection
 @section('js')

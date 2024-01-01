@@ -5,6 +5,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\InvoiceArchiveController;
 use App\Http\Controllers\InvoiceDetailsController;
 use App\Http\Controllers\InvoiceAttachmentController;
 
@@ -39,10 +40,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/invoice/invoice_store', 'store') -> name('invoice.store');
         Route::get('/invoice/invoice_edit/{id}', 'edit') -> name('invoice.edit');
         Route::post('/invoice/invoice_update', 'update') -> name('invoice.update');
-        Route::delete('/invoice/invoice_delete', 'delete') -> name('invoice.delete');
-        Route::get('/invoice/invoice_archive', 'show')->name('invoice.archive');
-        Route::get('/invoice/archive_recovery/{id}', 'recovery')->name('recovery.archive');
         Route::delete('/invoice/invoice_destroy', 'destroy') -> name('invoice.destroy');
+        Route::get('/invoice/invoice_payment/{id}', 'show') -> name('invoice.show.payment');
     });
 
     //Invoice Details
@@ -56,6 +55,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Invoice Attachments
     Route::controller(InvoiceAttachmentController::class)->group(function () {
         Route::post('invoice_details/insert_attachment', 'store')->name('attachment.store');
+    });
+
+    //Invoice Archive
+    Route::controller(InvoiceArchiveController::class)->group(function () {
+        Route::get('/invoice/invoice_archive', 'show')->name('invoice.archive');
+        Route::get('/invoice/archive_recovery/{id}', 'recovery')->name('recovery.archive');
     });
 
 });
