@@ -7,8 +7,10 @@ use App\Models\Section;
 use Illuminate\Http\Request;
 use App\Models\InvoiceDetails;
 use App\Models\InvoiceAttachment;
+use App\Notifications\AddInvoice;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 
 class InvoiceController extends Controller
 {
@@ -47,6 +49,11 @@ class InvoiceController extends Controller
     //Insert Invoice In DataBase
     public function store (request $request) {
         // return $request;
+        $validated = $request->validate([
+            'invoice_number' => 'required|unique:invoices|max:255',
+        ],[
+            'invoice_number.unique' => 'رقم الفاتورة موجود بالفعل', 
+        ]);
         Invoice::create([
             'invoice_number' => $request->invoice_number,
             'invoice_Date' => $request->invoice_Date,
@@ -93,8 +100,10 @@ class InvoiceController extends Controller
             $imageName = $request->pic->getClientOriginalName();
             $request->pic->move(public_path('Attachments/' . $invoice_number), $imageName);
         }
+        // $user = User::first();
+        // Notification::send($user , new AddInvoice($invoice_id));
+        Notification::route('mail', 'mohamednagy767@gmail.com')->notify(new AddInvoice($invoice_id));;
         return redirect() -> route('invoice.insert') -> with('add', 'تم اضافة الفاتورة بنجاح');
-        // return $invoice_id;
     }
 
     // Edit Invoice
@@ -109,6 +118,12 @@ class InvoiceController extends Controller
     {
         $id = $request -> id;
         $invoice_number = $request->invoice_number;
+
+        $validated = $request->validate([
+            'invoice_number' => 'required|unique:invoices,invoice_number,'.$id,
+        ],[
+            'invoice_number.unique' => 'رقم الفاتورة موجود بالفعل', 
+        ]);
         
         # Update Invoice
         Invoice::findOrFail($id) -> update([
@@ -127,7 +142,7 @@ class InvoiceController extends Controller
         ]);
         # Get Data Details & Attachment
         $invoice_details = InvoiceDetails::where('invoice_id', $id) -> first() -> invoice_number;
-        $invoice_attachment = InvoiceAttachment::where('invoice_id', $id) -> first() -> invoice_number;
+        $invoice_attachment = InvoiceAttachment::where('invoice_id', $id) -> pluck('invoice_number') -> first();
         # check Invoive Number
         if ($invoice_details != $invoice_number && $invoice_attachment != $invoice_number) {
             # Update Details
