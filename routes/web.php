@@ -43,6 +43,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/invoice/invoice_destroy', 'destroy') -> name('invoice.destroy');
         Route::get('/invoice/invoice_payment/{id}', 'show') -> name('invoice.show.payment');
         Route::post('/invoice/update_payment', 'status_update') -> name('update.payment');
+        Route::get('/invoice/invoice_template/{id}', 'invoice_template')->name('invoice.template');
     });
 
     //Invoice Details

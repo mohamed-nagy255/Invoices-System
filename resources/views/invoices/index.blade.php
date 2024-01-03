@@ -114,7 +114,7 @@
                                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
-                                                    <div class="dropdown-menu dropdown-menu-left">
+                                                    <div class="dropdown-menu dropdown-menu-right">
                                                         <a class="dropdown-item"
                                                             href="{{ route('invoice.edit', $invoice->id) }}">
                                                             تعديل <span class="fe fe-edit fe-16 text-success "></span>
@@ -129,12 +129,17 @@
                                                             data-id="{{ $invoice->id }}"
                                                             data-invoice_number="{{ $invoice->invoice_number }}">
                                                             ارشفة الفاتورة <span
-                                                                class="fe fe-layers fe-16 text-success "></span>
+                                                                class="fe fe-layers fe-16 text-warning "></span>
                                                         </a>
                                                         <a class="dropdown-item"
                                                             href="{{ route('details.index', $invoice->id) }}">
                                                             المعلومات <span
                                                                 class="fe fe-package fe-16 text-success "></span>
+                                                        </a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('invoice.template', $invoice->id) }}">
+                                                            طباعة الفاتورة
+                                                            <span class="fe fe-printer fe-16 text-success"></span>
                                                         </a>
                                                         <a type="button" class="dropdown-item" data-toggle="modal"
                                                             data-target="#deleteModal" data-whatever="@mdo"

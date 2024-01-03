@@ -252,4 +252,12 @@ class InvoiceController extends Controller
             return redirect() -> back() -> with('not', ' لم يتم تغيير حالة دفع الفاتورة بنجاح');
         }
     }
+
+    ################################
+    ######## Print Invoice #########
+    ################################
+    public function invoice_template ($id) {
+        $invoice = Invoice::where('id', $id) -> first();
+        return view('invoices.invoiceTemplate', compact('invoice'));
+    }
 }

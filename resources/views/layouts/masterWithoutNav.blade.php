@@ -18,6 +18,7 @@
 
     <style>
         body {
+            background-color: white;
             overflow: hidden;
         }
     </style>
