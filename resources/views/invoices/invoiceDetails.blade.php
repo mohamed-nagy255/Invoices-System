@@ -180,12 +180,16 @@
                                         <div class="card-body">
                                             <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
                                             <h5 class="card-title">اضافة مرفقات</h5>
-                                            <form method="post" action="{{ route('attachment.store') }}" enctype="multipart/form-data">
+                                            <form method="post" action="{{ route('attachment.store') }}"
+                                                enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="customFile" name="file_name[]" multiple required>
-                                                    <input type="hidden" id="customFile" name="invoice_number" value="{{ $invoices->invoice_number }}">
-                                                    <input type="hidden" id="invoice_id" name="invoice_id" value="{{ $invoices->id }}">
+                                                    <input type="file" class="custom-file-input" id="customFile"
+                                                        name="file_name[]" multiple required>
+                                                    <input type="hidden" id="customFile" name="invoice_number"
+                                                        value="{{ $invoices->invoice_number }}">
+                                                    <input type="hidden" id="invoice_id" name="invoice_id"
+                                                        value="{{ $invoices->id }}">
                                                     <label class="custom-file-label" for="customFile">
                                                         حددالمرفق
                                                     </label>

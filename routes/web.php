@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -44,6 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/invoice/invoice_payment/{id}', 'show') -> name('invoice.show.payment');
         Route::post('/invoice/update_payment', 'status_update') -> name('update.payment');
         Route::get('/invoice/invoice_template/{id}', 'invoice_template')->name('invoice.template');
+        Route::get('/export_excel', 'export')->name('export.excel');
     });
 
     //Invoice Details
@@ -63,6 +66,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::controller(InvoiceArchiveController::class)->group(function () {
         Route::get('/invoice/invoice_archive', 'show')->name('invoice.archive');
         Route::get('/invoice/archive_recovery/{id}', 'recovery')->name('recovery.archive');
+    });
+
+    // Users
+    Route::controller(UserController::class)->group(function () {
+        Route::get('/users', 'index')->name('user.index');
+    });
+
+    // Roles
+    Route::controller(RoleController::class)->group(function () {
+        Route::get('/roles', 'index')->name('role.index');
     });
 
 });

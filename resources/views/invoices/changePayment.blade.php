@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'تغيير حالة الدفع')
 @section('css')
- 
+
 @endsection
 @section('content')
     <div class="row">
@@ -152,11 +152,11 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputName" class="control-label">تاريخ الدفع</label>
-                                <input type="date" name="Payment_Date" class="form-control" id="Payment_Date" 
+                                <input type="date" name="Payment_Date" class="form-control" id="Payment_Date"
                                     value="{{ date('Y-m-d') }}" required>
                             </div>
                         </div>
-                        
+
                         <div class="form-row">
                             <button type="submit" class="btn btn-success">تحديث حالة الدفع</button>
                         </div>

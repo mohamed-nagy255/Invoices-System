@@ -15,12 +15,11 @@
                                 @if (request()->is('invoice/invoice_table/invoice_all'))
                                     / قائمة الفواتير
                                 @elseif (request()->is('invoice/invoice_table/paid_invoice'))
-                                / الفواتير المدفوعة
+                                    / الفواتير المدفوعة
                                 @elseif (request()->is('invoice/invoice_table/partpaid_invoice'))
-                                / الفواتير المدفوعة جزئياٌ
+                                    / الفواتير المدفوعة جزئياٌ
                                 @elseif (request()->is('invoice/invoice_table/unpaid_invoice'))
-                                / الفواتير الغير المدفوعة
-                                    
+                                    / الفواتير الغير المدفوعة
                                 @endif
                             </span>
                         </h2>
@@ -28,6 +27,9 @@
                     <div class="col-md-auto ml-auto text-right">
                         <a href="{{ route('invoice.insert') }}" type="button" class="btn">
                             اضافة فاتورة <span class="fe fe-plus-square fe-16 text-primary"></span>
+                        </a>
+                        <a href="{{ route('export.excel') }}" type="button" class="btn">
+                            تصدير اكسيل <span class="fe fe-upload fe-16 text-success"></span>
                         </a>
                     </div>
                 </div>

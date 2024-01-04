@@ -11,17 +11,20 @@
         .col-md-5 {
             flex: 0 0 50%;
         }
+
         @media print {
-        body {
-            margin: 0;
-            padding: 0;
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            table {
+                width: 100%;
+                max-width: 450px;
+                /* Adjust the max-width as needed */
+                margin: 50px auto;
+            }
         }
-        table {
-            width: 100%;
-            max-width: 450px; /* Adjust the max-width as needed */
-            margin: 50px auto;
-        }
-    }
     </style>
 @endsection
 @section('content')
@@ -132,13 +135,13 @@
                     <div class="row mt-4">
                         <div class="col-2 text-center">
                             <img src="{{ asset('./assets/images/qr.png') }}" class="navbar-brand-img brand-sm mx-auto my-4"
-                              alt="..." />
+                                alt="..." />
                         </div>
                         <div class="col-4 md-5">
                             <p class="text-muted small">
                                 <strong>ملحوظة :</strong> Lorem ipsum dolor sit amet,
                                 consectetur adipiscing elit. Nam hendrerit nisi sed
-                                sollicitudin pellentesque. 
+                                sollicitudin pellentesque.
                             </p>
                         </div>
                         <div class="col-md-5">

@@ -7,8 +7,8 @@
                     <!-- nav bar -->
                     <div class="w-100 mb-4 d-flex">
                         <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="/">
-                            <img src="{{ asset('./assets/images/logo.png') }}" class="navbar-brand-img brand-sm mx-auto mb-4" style="width: 100px"
-                                alt="..." />
+                            <img src="{{ asset('./assets/images/logo.png') }}"
+                                class="navbar-brand-img brand-sm mx-auto mb-4" style="width: 100px" alt="..." />
                         </a>
                     </div>
                     <ul class="navbar-nav flex-fill w-100 mb-2">
@@ -35,25 +35,25 @@
                                     <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/invoice_all') ? 'nav-active' : '' }}
                                         {{ request()->is('invoice/invoice_insert') ? 'nav-active' : '' }}
                                         {{ request()->is('invoice/invoice_payment*') ? 'nav-active' : '' }}"
-                                        href="{{ route('invoice.index', $id_page = "invoice_all") }}">
+                                        href="{{ route('invoice.index', $id_page = 'invoice_all') }}">
                                         <span class="ml-1 item-text">قائمة الفواتير</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/paid_invoice') ? 'nav-active' : '' }}" 
-                                        href="{{ route('invoice.index', $id_page = "paid_invoice") }}">
+                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/paid_invoice') ? 'nav-active' : '' }}"
+                                        href="{{ route('invoice.index', $id_page = 'paid_invoice') }}">
                                         <span class="ml-1 item-text"> الفواتير المدفوعة</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/partpaid_invoice') ? 'nav-active' : '' }}" 
-                                        href="{{ route('invoice.index', $id_page = "partpaid_invoice") }}">
+                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/partpaid_invoice') ? 'nav-active' : '' }}"
+                                        href="{{ route('invoice.index', $id_page = 'partpaid_invoice') }}">
                                         <span class="ml-1 item-text"> الفواتير المدفوعة جزئا</span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/unpaid_invoice') ? 'nav-active' : '' }}" 
-                                    href="{{ route('invoice.index', $id_page = "unpaid_invoice") }}">
+                                    <a class="nav-link pl-3 {{ request()->is('invoice/invoice_table/unpaid_invoice') ? 'nav-active' : '' }}"
+                                        href="{{ route('invoice.index', $id_page = 'unpaid_invoice') }}">
                                         <span class="ml-1 item-text"> الفواتير الغير المدفوعة</span>
                                     </a>
                                 </li>
@@ -92,20 +92,25 @@
                             </ul>
                         </li>
                         {{-- Users --}}
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown {{ request()->is('users*') ? 'active' : '' }}">
                             <a href="#profile" data-toggle="collapse" aria-expanded="false"
                                 class="dropdown-toggle nav-link">
                                 <i class="fe fe-user fe-16"></i>
                                 <span class="ml-3 item-text">المستخدمين</span>
                             </a>
-                            <ul class="collapse list-unstyled pl-4 w-100" id="profile">
-                                <a class="nav-link pl-3" href="./profile.html"><span class="ml-1">Overview</span></a>
-                                <a class="nav-link pl-3" href="./profile-settings.html"><span
-                                        class="ml-1">Settings</span></a>
-                                <a class="nav-link pl-3" href="./profile-security.html"><span
-                                        class="ml-1">Security</span></a>
-                                <a class="nav-link pl-3" href="./profile-notification.html"><span
-                                        class="ml-1">Notifications</span></a>
+                            <ul class="collapse list-unstyled pl-4 w-100 
+                                {{ request()->is('users*') ? 'show' : '' }}
+                                {{ request()->is('roles*') ? 'show' : '' }}
+                                "
+                                id="profile">
+                                <a class="nav-link pl-3 {{ request()->is('users') ? 'nav-active' : '' }}"
+                                    href="{{ route('user.index') }}">
+                                    <span class="ml-1">قائمة المستخدمين</span>
+                                </a>
+                                <a class="nav-link pl-3 {{ request()->is('roles') ? 'nav-active' : '' }}"
+                                    href="{{ route('role.index') }}">
+                                    <span class="ml-1">صلاحيات المستخدمين</span>
+                                </a>
                             </ul>
                         </li>
                         {{-- Settings --}}
@@ -117,10 +122,10 @@
                             </a>
                             <ul class="collapse list-unstyled pl-4 w-100 {{ request()->is('setting*') ? 'show' : '' }}"
                                 id="settings">
-                                <a class="nav-link pl-3 {{ request()->is('setting/section') ? 'nav-active' : '' }}" href="{{ route('section.index') }}"><span
-                                        class="ml-1">الاقسام</span></a>
-                                <a class="nav-link pl-3 {{ request()->is('setting/Product') ? 'nav-active' : '' }}" href="{{ route('product.index') }}"><span
-                                        class="ml-1">المنتاجات</span></a>
+                                <a class="nav-link pl-3 {{ request()->is('setting/section') ? 'nav-active' : '' }}"
+                                    href="{{ route('section.index') }}"><span class="ml-1">الاقسام</span></a>
+                                <a class="nav-link pl-3 {{ request()->is('setting/Product') ? 'nav-active' : '' }}"
+                                    href="{{ route('product.index') }}"><span class="ml-1">المنتاجات</span></a>
                             </ul>
                         </li>
                     </ul>

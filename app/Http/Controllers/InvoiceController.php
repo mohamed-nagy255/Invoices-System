@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ExportInvoice;
 use App\Models\Invoice;
 use App\Models\Section;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use App\Models\InvoiceAttachment;
 use App\Notifications\AddInvoice;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Notification;
 
 class InvoiceController extends Controller
@@ -96,7 +98,7 @@ class InvoiceController extends Controller
             $attachments->Created_by = Auth()->user()->name;
             $attachments->invoice_id = $invoice_id;
             $attachments->save();
-            // move pic
+            # move pic
             $imageName = $request->pic->getClientOriginalName();
             $request->pic->move(public_path('Attachments/' . $invoice_number), $imageName);
         }
@@ -259,5 +261,12 @@ class InvoiceController extends Controller
     public function invoice_template ($id) {
         $invoice = Invoice::where('id', $id) -> first();
         return view('invoices.invoiceTemplate', compact('invoice'));
+    }
+
+    ################################
+    ######## Export Invoice ########
+    ################################
+    public function export () {
+        return Excel::download(new ExportInvoice, 'قائمة الفواتير.xlsx');
     }
 }
