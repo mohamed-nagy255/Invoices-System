@@ -15,10 +15,10 @@
                         </h2>
                     </div>
                     <div class="col-md-auto ml-auto text-right">
-                        <button type="button" class="btn">
+                        <a href="{{ route('role.create') }}" type="button" class="btn">
                             اضافة صلاحية
                             <span class="fe fe-plus-square fe-16 text-primary"></span>
-                        </button>
+                        </a>
                     </div>
                 </div>
 
@@ -54,22 +54,6 @@
                             </button>
                         </div>
                     @endif
-                    {{-- ERORR --}}
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>
-                                        {{ $error }}
-                                        <i class="fe fe-alert-triangle fe-16"></i>
-                                    </li>
-                                @endforeach
-                            </ul>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    @endif
                 </div> <!-- /. col -->
                 <div class="row my-4">
                     <!-- Small table -->
@@ -94,12 +78,18 @@
                                                 <td style="color: white">
                                                     <a type="button" class="btn">
                                                         <i class="fe fe-edit fe-16"></i>
-                                                        <span class="fe fe-edit fe-16 text-success"></span>
+                                                        <span class="fe fe-eye fe-16 text-primary"></span>
                                                     </a>
                                                     <a type="button" class="btn">
-                                                        <i class="fe fe-trash fe-16"></i>
-                                                        <span class="fe fe-trash-2 fe-16 text-danger"></span>
+                                                        <i class="fe fe-edit fe-16"></i>
+                                                        <span class="fe fe-edit fe-16 text-success"></span>
                                                     </a>
+                                                    @if ($role->name != 'owner')
+                                                        <a type="button" class="btn">
+                                                            <i class="fe fe-trash fe-16"></i>
+                                                            <span class="fe fe-trash-2 fe-16 text-danger"></span>
+                                                        </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -76,6 +76,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Roles
     Route::controller(RoleController::class)->group(function () {
         Route::get('/roles', 'index')->name('role.index');
+        Route::get('/roles/create', 'create')->name('role.create');
+        Route::post('/roles/store', 'store')->name('role.store');
     });
 
 });

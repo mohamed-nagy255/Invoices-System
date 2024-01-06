@@ -95,17 +95,35 @@
                                                 <td>{{ $id++ }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>
+                                                    @if ($user->Status == 'مفعل')
+                                                        <span class="label text-success d-flex">
+                                                            <div class="dot-label bg-success ml-1"></div>{{ $user->Status }}
+                                                        </span>
+                                                    @else
+                                                        <span class="label text-danger d-flex">
+                                                            <div class="dot-label bg-danger ml-1"></div>{{ $user->Status }}
+                                                        </span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if (!empty($user->getRoleNames()))
+                                                        @foreach ($user->getRoleNames() as $v)
+                                                            <label class="badge badge-success">{{ $v }}</label>
+                                                        @endforeach
+                                                    @endif
+                                                </td>
                                                 <td style="color: white">
                                                     <a type="button" class="btn">
                                                         <i class="fe fe-edit fe-16"></i>
                                                         <span class="fe fe-edit fe-16 text-success"></span>
                                                     </a>
-                                                    <a type="button" class="btn">
-                                                        <i class="fe fe-trash fe-16"></i>
-                                                        <span class="fe fe-trash-2 fe-16 text-danger"></span>
-                                                    </a>
+                                                    @if ($user->role_name != 'owner')
+                                                        <a type="button" class="btn">
+                                                            <i class="fe fe-trash fe-16"></i>
+                                                            <span class="fe fe-trash-2 fe-16 text-danger"></span>
+                                                        </a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
