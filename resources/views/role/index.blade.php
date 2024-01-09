@@ -35,9 +35,9 @@
                         </div>
                     @endif
                     {{-- UPDATE --}}
-                    @if (session()->has('edit'))
+                    @if (session()->has('update'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong> {{ session()->get('edit') }} </strong>
+                            <strong> {{ session()->get('update') }} </strong>
                             <i class="fe fe-check-circle fe-16"></i>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -76,17 +76,18 @@
                                                 <td>{{ $id++ }}</td>
                                                 <td>{{ $role->name }}</td>
                                                 <td style="color: white">
-                                                    <a type="button" class="btn">
-                                                        <i class="fe fe-edit fe-16"></i>
+                                                    <a href="{{ route('role.show', $role->id) }}" type="button"
+                                                        class="btn" title="SHOW">
                                                         <span class="fe fe-eye fe-16 text-primary"></span>
                                                     </a>
-                                                    <a type="button" class="btn">
-                                                        <i class="fe fe-edit fe-16"></i>
-                                                        <span class="fe fe-edit fe-16 text-success"></span>
-                                                    </a>
                                                     @if ($role->name != 'owner')
-                                                        <a type="button" class="btn">
-                                                            <i class="fe fe-trash fe-16"></i>
+                                                        <a href="{{ route('role.edit', $role->id) }}" type="button"
+                                                            class="btn" title="EDITE">
+                                                            <span class="fe fe-edit fe-16 text-success"></span>
+                                                        </a>
+                                                        <a type="button" class="btn" data-toggle="modal"
+                                                            data-target="#deleteModal" data-whatever="@mdo"
+                                                            data-id="{{ $role->id }}" title="DELETE">
                                                             <span class="fe fe-trash-2 fe-16 text-danger"></span>
                                                         </a>
                                                     @endif
@@ -102,6 +103,7 @@
             </div> <!-- .col-12 -->
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
+    @include('role.deleteModale')
 @endsection
 @section('js')
     <script src='{{ asset('assets/js/jquery.dataTables.min.js') }}'></script>
@@ -114,5 +116,14 @@
                 [16, 32, 64, "All"]
             ]
         });
+    </script>
+    {{-- DELETE MODALE --}}
+    <script>
+        $('#deleteModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id);
+        })
     </script>
 @endsection

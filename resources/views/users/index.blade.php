@@ -15,10 +15,10 @@
                         </h2>
                     </div>
                     <div class="col-md-auto ml-auto text-right">
-                        <button type="button" class="btn">
+                        <a href="{{ route('user.create') }}" type="button" class="btn">
                             اضافة مستخدم
                             <span class="fe fe-plus-square fe-16 text-primary"></span>
-                        </button>
+                        </a>
                     </div>
                 </div>
 

@@ -71,6 +71,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Users
     Route::controller(UserController::class)->group(function () {
         Route::get('/users', 'index')->name('user.index');
+        Route::get('/users/create', 'create')->name('user.create');
+        Route::post('/users/store', 'store')->name('user.store');
+        Route::get('/users/edit', 'edit')->name('user.edit');
+        Route::patch('/users/update', 'update')->name('user.update');
     });
 
     // Roles
@@ -78,6 +82,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/roles', 'index')->name('role.index');
         Route::get('/roles/create', 'create')->name('role.create');
         Route::post('/roles/store', 'store')->name('role.store');
+        Route::get('/roles/show/{id}', 'show')->name('role.show');
+        Route::get('/roles/show/edit/{id}', 'edit')->name('role.edit');
+        Route::patch('/roles/show/update/{id}', 'update')->name('role.update');
+        Route::delete('/roles/show/destroy/{id}', 'destroy')->name('role.destroy');
     });
 
 });
