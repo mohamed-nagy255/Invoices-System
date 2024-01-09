@@ -2,16 +2,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="varyModalLabel">حذف صلاحية</h5>
+                <h5 class="modal-title" id="varyModalLabel">حذف مستخدم</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{ route('role.destroy', $role->id) }}" autocomplete="off">
+                <form method="post" action="{{ route('user.destroy') }}" autocomplete="off">
                     @method('delete')
                     @csrf
-                    <strong>هل انت متاكد من حذف هذه الصلاحية...؟ </strong>
+                    <input type="hidden" name="id" id="id">
+                    <strong>هل انت متاكد من حذف هذا المستخدم...؟ </strong>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn mb-2 btn-secondary" data-dismiss="modal">اغلاق</button>

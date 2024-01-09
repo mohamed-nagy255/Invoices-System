@@ -75,15 +75,15 @@
                                     <option value="غير مفعل">غير مفعل</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="row mg-b-20">
-                            <div class="col-xs-12 col-md-12">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-label"> صلاحية المستخدم</label>
                                     {!! Form::select('role_name', $roles, [], ['class' => 'form-control']) !!}
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row mg-b-20">
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button class="btn btn-primary pd-x-20" type="submit">حفظ المستخدم</button>

@@ -15,10 +15,12 @@
                         </h2>
                     </div>
                     <div class="col-md-auto ml-auto text-right">
-                        <a href="{{ route('role.create') }}" type="button" class="btn">
-                            اضافة صلاحية
-                            <span class="fe fe-plus-square fe-16 text-primary"></span>
-                        </a>
+                        @can('اضافة صلاحية')
+                            <a href="{{ route('role.create') }}" type="button" class="btn">
+                                اضافة صلاحية
+                                <span class="fe fe-plus-square fe-16 text-primary"></span>
+                            </a>
+                        @endcan
                     </div>
                 </div>
 
@@ -76,20 +78,26 @@
                                                 <td>{{ $id++ }}</td>
                                                 <td>{{ $role->name }}</td>
                                                 <td style="color: white">
-                                                    <a href="{{ route('role.show', $role->id) }}" type="button"
-                                                        class="btn" title="SHOW">
-                                                        <span class="fe fe-eye fe-16 text-primary"></span>
-                                                    </a>
+                                                    @can('عرض صلاحية')
+                                                        <a href="{{ route('role.show', $role->id) }}" type="button"
+                                                            class="btn" title="SHOW">
+                                                            <span class="fe fe-eye fe-16 text-primary"></span>
+                                                        </a>
+                                                    @endcan
                                                     @if ($role->name != 'owner')
-                                                        <a href="{{ route('role.edit', $role->id) }}" type="button"
-                                                            class="btn" title="EDITE">
-                                                            <span class="fe fe-edit fe-16 text-success"></span>
-                                                        </a>
-                                                        <a type="button" class="btn" data-toggle="modal"
-                                                            data-target="#deleteModal" data-whatever="@mdo"
-                                                            data-id="{{ $role->id }}" title="DELETE">
-                                                            <span class="fe fe-trash-2 fe-16 text-danger"></span>
-                                                        </a>
+                                                        @can('تعديل صلاحية')
+                                                            <a href="{{ route('role.edit', $role->id) }}" type="button"
+                                                                class="btn" title="EDITE">
+                                                                <span class="fe fe-edit fe-16 text-success"></span>
+                                                            </a>
+                                                        @endcan
+                                                        @can('حذف صلاحية')
+                                                            <a type="button" class="btn" data-toggle="modal"
+                                                                data-target="#deleteModal" data-whatever="@mdo"
+                                                                data-id="{{ $role->id }}" title="DELETE">
+                                                                <span class="fe fe-trash-2 fe-16 text-danger"></span>
+                                                            </a>
+                                                        @endcan
                                                     @endif
                                                 </td>
                                             </tr>

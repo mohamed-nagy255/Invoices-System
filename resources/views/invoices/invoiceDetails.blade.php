@@ -176,33 +176,33 @@
                                     aria-labelledby="pills-contact-tab">
                                     <div class="card card-statistics">
                                         {{-- ADD ATTACHMENTS --}}
-                                        {{-- @can('اضافة مرفق') --}}
-                                        <div class="card-body">
-                                            <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
-                                            <h5 class="card-title">اضافة مرفقات</h5>
-                                            <form method="post" action="{{ route('attachment.store') }}"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="customFile"
-                                                        name="file_name[]" multiple required>
-                                                    <input type="hidden" id="customFile" name="invoice_number"
-                                                        value="{{ $invoices->invoice_number }}">
-                                                    <input type="hidden" id="invoice_id" name="invoice_id"
-                                                        value="{{ $invoices->id }}">
-                                                    <label class="custom-file-label" for="customFile">
-                                                        حددالمرفق
-                                                    </label>
-                                                </div>
-                                                <br>
-                                                <br>
-                                                <button type="submit" class="btn btn-primary btn-sm "
-                                                    name="uploadedFile">
-                                                    تاكيد
-                                                </button>
-                                            </form>
-                                        </div>
-                                        {{-- @endcan --}}
+                                        @can('اضافة مرفق')
+                                            <div class="card-body">
+                                                <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
+                                                <h5 class="card-title">اضافة مرفقات</h5>
+                                                <form method="post" action="{{ route('attachment.store') }}"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" id="customFile"
+                                                            name="file_name[]" multiple required>
+                                                        <input type="hidden" id="customFile" name="invoice_number"
+                                                            value="{{ $invoices->invoice_number }}">
+                                                        <input type="hidden" id="invoice_id" name="invoice_id"
+                                                            value="{{ $invoices->id }}">
+                                                        <label class="custom-file-label" for="customFile">
+                                                            حددالمرفق
+                                                        </label>
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                    <button type="submit" class="btn btn-primary btn-sm "
+                                                        name="uploadedFile">
+                                                        تاكيد
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        @endcan
                                         <br>
                                         <table class="table datatables" id="dataTable-1">
                                             <thead>
@@ -235,13 +235,15 @@
                                                                 role="button"><i class="fas fa-download"></i>&nbsp;
                                                                 تحميل
                                                             </a>
-                                                            <a type="button" class="btn btn-outline-danger btn-sm"
-                                                                data-toggle="modal" data-target="#deleteModal"
-                                                                data-whatever="@mdo" data-id="{{ $row->id }}"
-                                                                data-file="{{ $row->file_name }}"
-                                                                data-invoice="{{ $row->invoice_number }}">
-                                                                حذف
-                                                            </a>
+                                                            @can('حذف المرفق')
+                                                                <a type="button" class="btn btn-outline-danger btn-sm"
+                                                                    data-toggle="modal" data-target="#deleteModal"
+                                                                    data-whatever="@mdo" data-id="{{ $row->id }}"
+                                                                    data-file="{{ $row->file_name }}"
+                                                                    data-invoice="{{ $row->invoice_number }}">
+                                                                    حذف
+                                                                </a>
+                                                            @endcan
                                                         </td>
                                                     </tr>
                                                 @endforeach

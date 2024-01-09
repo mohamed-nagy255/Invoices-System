@@ -25,12 +25,16 @@
                         </h2>
                     </div>
                     <div class="col-md-auto ml-auto text-right">
-                        <a href="{{ route('invoice.insert') }}" type="button" class="btn">
-                            اضافة فاتورة <span class="fe fe-plus-square fe-16 text-primary"></span>
-                        </a>
-                        <a href="{{ route('export.excel') }}" type="button" class="btn">
-                            تصدير اكسيل <span class="fe fe-upload fe-16 text-success"></span>
-                        </a>
+                        @can('اضافة فاتورة')
+                            <a href="{{ route('invoice.insert') }}" type="button" class="btn">
+                                اضافة فاتورة <span class="fe fe-plus-square fe-16 text-primary"></span>
+                            </a>
+                        @endcan
+                        @can('تصدير EXCEL')
+                            <a href="{{ route('export.excel') }}" type="button" class="btn">
+                                تصدير اكسيل <span class="fe fe-upload fe-16 text-success"></span>
+                            </a>
+                        @endcan
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -117,39 +121,49 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('invoice.edit', $invoice->id) }}">
-                                                            تعديل <span class="fe fe-edit fe-16 text-success "></span>
-                                                        </a>
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('invoice.show.payment', $invoice->id) }}">
-                                                            تغير حالة الدفع <span
-                                                                class="fe fe-target fe-16 text-success "></span>
-                                                        </a>
-                                                        <a type="button" class="dropdown-item" data-toggle="modal"
-                                                            data-target="#archiveModal" data-whatever="@mdo"
-                                                            data-id="{{ $invoice->id }}"
-                                                            data-invoice_number="{{ $invoice->invoice_number }}">
-                                                            ارشفة الفاتورة <span
-                                                                class="fe fe-layers fe-16 text-warning "></span>
-                                                        </a>
+                                                        @can('تعديل الفاتورة')
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('invoice.edit', $invoice->id) }}">
+                                                                تعديل <span class="fe fe-edit fe-16 text-success "></span>
+                                                            </a>
+                                                        @endcan
+                                                        @can('تغير حالة الدفع')
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('invoice.show.payment', $invoice->id) }}">
+                                                                تغير حالة الدفع <span
+                                                                    class="fe fe-target fe-16 text-success "></span>
+                                                            </a>
+                                                        @endcan
+                                                        @can('ارشفة الفاتورة')
+                                                            <a type="button" class="dropdown-item" data-toggle="modal"
+                                                                data-target="#archiveModal" data-whatever="@mdo"
+                                                                data-id="{{ $invoice->id }}"
+                                                                data-invoice_number="{{ $invoice->invoice_number }}">
+                                                                ارشفة الفاتورة <span
+                                                                    class="fe fe-layers fe-16 text-warning "></span>
+                                                            </a>
+                                                        @endcan
                                                         <a class="dropdown-item"
                                                             href="{{ route('details.index', $invoice->id) }}">
                                                             المعلومات <span
                                                                 class="fe fe-package fe-16 text-success "></span>
                                                         </a>
-                                                        <a class="dropdown-item"
-                                                            href="{{ route('invoice.template', $invoice->id) }}">
-                                                            طباعة الفاتورة
-                                                            <span class="fe fe-printer fe-16 text-success"></span>
-                                                        </a>
-                                                        <a type="button" class="dropdown-item" data-toggle="modal"
-                                                            data-target="#deleteModal" data-whatever="@mdo"
-                                                            data-id="{{ $invoice->id }}"
-                                                            data-invoice_number="{{ $invoice->invoice_number }}">
-                                                            حذف الفاتورة <span
-                                                                class="fe fe-trash-2 fe-16 text-danger "></span>
-                                                        </a>
+                                                        @can('طباعةالفاتورة')
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('invoice.template', $invoice->id) }}">
+                                                                طباعة الفاتورة
+                                                                <span class="fe fe-printer fe-16 text-success"></span>
+                                                            </a>
+                                                        @endcan
+                                                        @can('حذف الفاتورة')
+                                                            <a type="button" class="dropdown-item" data-toggle="modal"
+                                                                data-target="#deleteModal" data-whatever="@mdo"
+                                                                data-id="{{ $invoice->id }}"
+                                                                data-invoice_number="{{ $invoice->invoice_number }}">
+                                                                حذف الفاتورة <span
+                                                                    class="fe fe-trash-2 fe-16 text-danger "></span>
+                                                            </a>
+                                                        @endcan
                                                     </div>
                                                 </div>
                                             </td>

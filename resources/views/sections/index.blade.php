@@ -15,11 +15,13 @@
                         </h2>
                     </div>
                     <div class="col-md-auto ml-auto text-right">
-                        <button type="button" class="btn" data-toggle="modal" data-target="#varyModal"
-                            data-whatever="@mdo">
-                             اضافة قسم 
-                            <span class="fe fe-plus-square fe-16 text-primary"></span>
-                        </button>
+                        @can('اضافة قسم')
+                            <button type="button" class="btn" data-toggle="modal" data-target="#varyModal"
+                                data-whatever="@mdo">
+                                اضافة قسم
+                                <span class="fe fe-plus-square fe-16 text-primary"></span>
+                            </button>
+                        @endcan
                     </div>
                 </div>
 
@@ -101,19 +103,23 @@
                                                     @endif
                                                 </td>
                                                 <td style="color: white">
-                                                    <a type="button" class="btn" data-toggle="modal"
-                                                        data-target="#editModal" data-whatever="@mdo"
-                                                        data-id="{{ $row->id }}"
-                                                        data-section_name="{{ $row->section_name }}"
-                                                        data-description="{{ $row->description }}">
-                                                        <span class="fe fe-edit fe-16 text-success"></span>
-                                                    </a>
-                                                    <a type="button" class="btn" data-toggle="modal"
-                                                        data-target="#deleteModal" data-whatever="@mdo"
-                                                        data-id="{{ $row->id }}"
-                                                        data-section_name="{{ $row->section_name }}">
-                                                        <span class="fe fe-trash-2 fe-16 text-danger"></span>
-                                                    </a>
+                                                    @can('تعديل قسم')
+                                                        <a type="button" class="btn" data-toggle="modal"
+                                                            data-target="#editModal" data-whatever="@mdo"
+                                                            data-id="{{ $row->id }}"
+                                                            data-section_name="{{ $row->section_name }}"
+                                                            data-description="{{ $row->description }}">
+                                                            <span class="fe fe-edit fe-16 text-success"></span>
+                                                        </a>
+                                                    @endcan
+                                                    @can('حذف قسم')
+                                                        <a type="button" class="btn" data-toggle="modal"
+                                                            data-target="#deleteModal" data-whatever="@mdo"
+                                                            data-id="{{ $row->id }}"
+                                                            data-section_name="{{ $row->section_name }}">
+                                                            <span class="fe fe-trash-2 fe-16 text-danger"></span>
+                                                        </a>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -15,10 +15,12 @@
                         </h2>
                     </div>
                     <div class="col-md-auto ml-auto text-right">
-                        <a href="{{ route('user.create') }}" type="button" class="btn">
-                            اضافة مستخدم
-                            <span class="fe fe-plus-square fe-16 text-primary"></span>
-                        </a>
+                        @can('اضافة مستخدم')
+                            <a href="{{ route('user.create') }}" type="button" class="btn">
+                                اضافة مستخدم
+                                <span class="fe fe-plus-square fe-16 text-primary"></span>
+                            </a>
+                        @endcan
                     </div>
                 </div>
 
@@ -114,15 +116,26 @@
                                                     @endif
                                                 </td>
                                                 <td style="color: white">
-                                                    <a type="button" class="btn">
-                                                        <i class="fe fe-edit fe-16"></i>
-                                                        <span class="fe fe-edit fe-16 text-success"></span>
-                                                    </a>
-                                                    @if ($user->role_name != 'owner')
-                                                        <a type="button" class="btn">
-                                                            <i class="fe fe-trash fe-16"></i>
-                                                            <span class="fe fe-trash-2 fe-16 text-danger"></span>
+                                                    @can('تعديل مستخدم')
+                                                        <a href="{{ route('user.show', $user->id) }}" type="button"
+                                                            class="btn">
+                                                            <span class="fe fe-eye fe-16 text-primary"></span>
                                                         </a>
+                                                    @endcan
+                                                    @if ($user->role_name != 'owner')
+                                                        @can('تعديل مستخدم')
+                                                            <a href="{{ route('user.edit', $user->id) }}" type="button"
+                                                                class="btn">
+                                                                <span class="fe fe-edit fe-16 text-success"></span>
+                                                            </a>
+                                                        @endcan
+                                                        @can('حذف مستخدم')
+                                                            <a type="button" class="btn" data-toggle="modal"
+                                                                data-target="#deleteModal" data-whatever="@mdo"
+                                                                data-id="{{ $user->id }}" title="DELETE">
+                                                                <span class="fe fe-trash-2 fe-16 text-danger"></span>
+                                                            </a>
+                                                        @endcan
                                                     @endif
                                                 </td>
                                             </tr>
@@ -136,6 +149,7 @@
             </div> <!-- .col-12 -->
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
+    @include('users.deleteModale')
 @endsection
 @section('js')
     <script src='{{ asset('assets/js/jquery.dataTables.min.js') }}'></script>
@@ -148,5 +162,14 @@
                 [16, 32, 64, "All"]
             ]
         });
+    </script>
+    {{-- DELETE MODALE --}}
+    <script>
+        $('#deleteModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id);
+        })
     </script>
 @endsection

@@ -73,8 +73,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/users', 'index')->name('user.index');
         Route::get('/users/create', 'create')->name('user.create');
         Route::post('/users/store', 'store')->name('user.store');
-        Route::get('/users/edit', 'edit')->name('user.edit');
-        Route::patch('/users/update', 'update')->name('user.update');
+        Route::get('/users/show/{id}', 'show')->name('user.show');
+        Route::get('/users/edit/{id}', 'edit')->name('user.edit');
+        Route::patch('/users/update/{id}', 'update')->name('user.update');
+        Route::delete('/users/destroy', 'destroy')->name('user.destroy');
     });
 
     // Roles
