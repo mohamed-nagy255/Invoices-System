@@ -79,29 +79,30 @@
                         @endcan
                         @can('التقارير')
                             {{-- Reborts  --}}
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown  {{ request()->is('reports*') ? 'active' : '' }}">
                                 <a href="#charts" data-toggle="collapse" aria-expanded="false"
                                     class="dropdown-toggle nav-link">
                                     <i class="fe fe-pie-chart fe-16"></i>
                                     <span class="ml-3 item-text">التقارير</span>
                                 </a>
-                                <ul class="collapse list-unstyled pl-4 w-100" id="charts">
-                                    <li class="nav-item">
-                                        <a class="nav-link pl-3" href="./chart-inline.html"><span
-                                                class="ml-1 item-text">Inline Chart</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link pl-3" href="./chart-chartjs.html"><span
-                                                class="ml-1 item-text">Chartjs</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link pl-3" href="./chart-apexcharts.html"><span
-                                                class="ml-1 item-text">ApexCharts</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link pl-3" href="./datamaps.html"><span
-                                                class="ml-1 item-text">Datamaps</span></a>
-                                    </li>
+                                <ul class="collapse list-unstyled pl-4 w-100 {{ request()->is('reports*') ? 'show' : '' }}"
+                                    id="charts">
+                                    @can('تقرير الفواتير')
+                                        <li class="nav-item">
+                                            <a href="{{ route('report.index') }}"
+                                                class="nav-link pl-3 {{ request()->is('reports/invoices_report') ? 'nav-active' : '' }}">
+                                                <span class="ml-1 item-text">تقارير الفواتير</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('تقرير الفواتير')
+                                        <li class="nav-item">
+                                            <a href="{{ route('report.index') }}"
+                                                class="nav-link pl-3 {{ request()->is('reports/invoices_report') ? 'nav-active' : '' }}">
+                                                <span class="ml-1 item-text">تقارير الفواتير</span>
+                                            </a>
+                                        </li>
+                                    @endcan
                                 </ul>
                             </li>
                         @endcan

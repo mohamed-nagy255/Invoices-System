@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\InvoiceArchiveController;
 use App\Http\Controllers\InvoiceDetailsController;
+use App\Http\Controllers\InvoicesReportController;
 use App\Http\Controllers\InvoiceAttachmentController;
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -66,6 +67,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::controller(InvoiceArchiveController::class)->group(function () {
         Route::get('/invoice/invoice_archive', 'show')->name('invoice.archive');
         Route::get('/invoice/archive_recovery/{id}', 'recovery')->name('recovery.archive');
+    });
+
+    //Reports
+    Route::controller(InvoicesReportController::class)->group(function () {
+        Route::get('/reports/invoices_report', 'index')->name('report.index');
+        Route::post('/reports/invoices_report/search', 'search')->name('report.search');
     });
 
     // Users
