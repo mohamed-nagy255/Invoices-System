@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+
 
 class InvoiceArchiveController extends Controller
 {
+    function __construct() {
+        $this->middleware('permission:ارشفة الفاتورة', ['only' => ['show']]);
+    }
+
     //Invoice Archive
     public function show () {
         $invoices = Invoice::onlyTrashed() -> get();

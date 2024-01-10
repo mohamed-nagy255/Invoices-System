@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\InvoiceDetails;
 use App\Models\InvoiceAttachment;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Permission;
 
 class InvoiceDetailsController extends Controller
 {
+    function __construct() {
+        $this->middleware('permission:حذف المرفق', ['only' => ['destroy']]);        
+    }
+
     public function index ($id)
     {
         $invoices = Invoice::where('id', $id)->first();

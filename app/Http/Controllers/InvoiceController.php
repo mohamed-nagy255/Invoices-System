@@ -13,9 +13,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Notification;
+use Spatie\Permission\Models\Permission;
+
 
 class InvoiceController extends Controller
 {
+    function __construct() {
+        $this->middleware('permission:قائمة الفواتير', ['only' => ['index']]);
+        $this->middleware('permission:اضافة فاتورة', ['only' => ['create','store']]);
+        $this->middleware('permission:تعديل الفاتورة', ['only' => ['edit','update']]);
+        $this->middleware('permission:حذف الفاتورة', ['only' => ['destroy']]);        
+        $this->middleware('permission:تغير حالة الدفع', ['only' => ['show']]);        
+        $this->middleware('permission:طباعةالفاتورة', ['only' => ['invoice_template']]);        
+    }
+
     public function index ($id_page) {
         if ($id_page == 'invoice_all') {
             $invoices = Invoice::all();

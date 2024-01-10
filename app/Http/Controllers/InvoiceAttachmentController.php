@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\InvoiceAttachment;
+use Spatie\Permission\Models\Permission;
+
 
 class InvoiceAttachmentController extends Controller
 {
+   function __construct() {
+      $this->middleware('permission:اضافة مرفق', ['only' => ['create','store']]);
+  }
+
    public function store (request $request)
    {
       $invoice_id = $request -> invoice_id;

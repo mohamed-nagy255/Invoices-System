@@ -6,9 +6,17 @@ use App\Models\Product;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 
 class ProductController extends Controller
 {
+    function __construct() {
+        $this->middleware('permission:المنتجات', ['only' => ['index']]);
+        $this->middleware('permission:اضافة منتج', ['only' => ['create','store']]);
+        $this->middleware('permission:تعديل منتج', ['only' => ['edit','update']]);
+        $this->middleware('permission:حذف منتج', ['only' => ['destroy']]);        
+    }
+
     public function index () {
         $products = Product::all();
         $sections = Section::all();

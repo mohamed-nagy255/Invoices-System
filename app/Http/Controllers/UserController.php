@@ -7,9 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
+    function __construct() {
+        $this->middleware('permission:قائمة المستخدمين', ['only' => ['index']]);
+        $this->middleware('permission:اضافة مستخدم', ['only' => ['create','store']]);
+        $this->middleware('permission:تعديل مستخدم', ['only' => ['edit','update']]);
+        $this->middleware('permission:حذف مستخدم', ['only' => ['destroy']]);        
+    }
+
     public function index () {
         $users = User::orderBy('id', 'desc')->get();
         return view('users.index', compact('users'));

@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 
 class SectionController extends Controller
 {
+    function __construct() {
+        $this->middleware('permission:الاقسام', ['only' => ['index']]);
+        $this->middleware('permission:اضافة قسم', ['only' => ['create','store']]);
+        $this->middleware('permission:تعديل قسم', ['only' => ['edit','update']]);
+        $this->middleware('permission:حذف قسم', ['only' => ['destroy']]);        
+    }
+
     public function index () {
         $sections = DB::table('sections') -> get();
         return view('sections.index', compact('sections'));
