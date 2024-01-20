@@ -24,15 +24,14 @@
                                 <div class="row align-items-center">
                                     <div class="col-3 text-center">
                                         <span class="circle circle-sm bg-primary-light">
-                                            <i class="fe fe-16 fe-shopping-bag text-white mb-0"></i>
+                                            <i class="fe fe-16 fe-clipboard text-white mb-0"></i>
                                         </span>
                                     </div>
                                     <div class="col pr-0">
                                         <p class="small text-light mb-0">اجمالي الفواتير</p>
                                         <span class="h3 mb-0 text-white">${{ number_format($invoicies_sum, 2) }}</span>
                                         <div class="d-flex">
-                                            <span class="small text-muted mr-5">{{ $invoicies }}</span>
-                                            <span class="small text-muted">100%</span>
+                                            <span class="small text-success mr-5">{{ $invoicies }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -52,8 +51,7 @@
                                         <p class="small text-muted mb-0">الفواتير المدفوعة</p>
                                         <span class="h3 mb-0">{{ number_format($paid_invoicies_sum, 2) }}</span>
                                         <div class="d-flex">
-                                            <span class="small text-muted mr-5">{{ $paid_invoicies }}</span>
-                                            <span class="small text-muted">{{ round($paid_invoices_percentage) }}%</span>
+                                            <span class="small text-success mr-5">{{ $paid_invoicies }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -75,11 +73,7 @@
                                             <div class="col-auto">
                                                 <span
                                                     class="h3 mr-2 mb-0">{{ number_format($part_paid_invoicies_sum, 2) }}</span>
-                                                <div class="d-flex">
-                                                    <span class="small text-muted mr-5">{{ $part_paid_invoicies }}</span>
-                                                    <span
-                                                        class="small text-muted">{{ round($part_paid_invoices_percentage) }}%</span>
-                                                </div>
+                                                <span class="small text-warning mr-5">{{ $part_paid_invoicies }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -99,11 +93,7 @@
                                     <div class="col">
                                         <p class="small text-muted mb-0">الفواتير الغير مدفوعة</p>
                                         <span class="h3 mb-0">{{ number_format($un_paid_invoicies_sum, 2) }}</span>
-                                        <div class="d-flex">
-                                            <span class="small text-muted mr-5">{{ $un_paid_invoicies }}</span>
-                                            <span
-                                                class="small text-muted">{{ round($un_paid_invoices_percentage) }}%</span>
-                                        </div>
+                                        <span class="small text-danger mr-5">{{ $un_paid_invoicies }}</span>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,12 @@
 @extends('layouts.master')
 @section('title', 'تقارير الفواتير')
 @section('css')
-
+    <!-- Internal Data table css -->
+    <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -78,7 +83,7 @@
                                                         </div>
                                                     </div><br>
                                                     <div class="row mb-4">
-                                                        <div class="col-sm-1 col-md-1">
+                                                        <div class="col-sm-3 col-md-3">
                                                             <button class="btn btn-primary btn-block">بحث</button>
                                                         </div>
                                                     </div>
@@ -176,6 +181,8 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+    <!--Internal  Datatable js -->
+    <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#invoice_number').hide();
