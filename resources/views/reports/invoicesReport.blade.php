@@ -112,12 +112,14 @@
                                                                     <tr>
                                                                         <td>{{ $i++ }}</td>
                                                                         <td>{{ $invoice->invoice_number }} </td>
-                                                                        <td>{{ $invoice->invoice_Date }}</td>
+                                                                        <td>{{ $invoice->invoice_date }}</td>
                                                                         <td>{{ $invoice->Due_date }}</td>
                                                                         <td>{{ $invoice->product }}</td>
                                                                         <td>
                                                                             <a
-                                                                                href="{{ route('details.index', $invoice->id) }}">{{ $invoice->sections->section_name }}</a>
+                                                                                href="{{ route('details.index', $invoice->id) }}">
+                                                                                {{ $invoice->sections->section_name }}
+                                                                            </a>
                                                                         </td>
                                                                         <td>{{ $invoice->Discount }}</td>
                                                                         <td>{{ $invoice->Rate_VAT }}</td>
@@ -157,6 +159,23 @@
     </div> <!-- .container-fluid -->
 @endsection
 @section('js')
+    <!-- Internal Data tables -->
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <script>
         $(document).ready(function() {
             $('#invoice_number').hide();
