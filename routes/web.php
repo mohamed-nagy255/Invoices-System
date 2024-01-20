@@ -17,9 +17,6 @@ use App\Http\Controllers\InvoiceAttachmentController;
 Route::middleware(['auth', 'verified'])->group(function () {
 
     //Dashboard
-    // Route::get('/', function () { 
-    //     return view('dashboard'); 
-    // }) -> name('dashboard');
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
     //Sections
