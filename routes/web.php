@@ -1,12 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\CustemorReportController;
 use App\Http\Controllers\InvoiceArchiveController;
 use App\Http\Controllers\InvoiceDetailsController;
 use App\Http\Controllers\InvoicesReportController;
@@ -15,9 +17,10 @@ use App\Http\Controllers\InvoiceAttachmentController;
 Route::middleware(['auth', 'verified'])->group(function () {
 
     //Dashboard
-    Route::get('/', function () { 
-        return view('dashboard'); 
-    }) -> name('dashboard');
+    // Route::get('/', function () { 
+    //     return view('dashboard'); 
+    // }) -> name('dashboard');
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
     //Sections
     Route::controller(SectionController::class)->group(function () {
@@ -69,10 +72,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/invoice/archive_recovery/{id}', 'recovery')->name('recovery.archive');
     });
 
-    //Reports
+    //Invoice Reports
     Route::controller(InvoicesReportController::class)->group(function () {
         Route::get('/reports/invoices_report', 'index')->name('report.index');
         Route::post('/reports/invoices_report/search', 'search')->name('report.search');
+    });
+
+    //Custemor Reports
+    Route::controller(CustemorReportController::class)->group(function () {
+        Route::get('/reports/custemor_report', 'index')->name('custemorReport.index');
+        Route::post('/reports/custemor_report/search', 'search')->name('custemorReport.search');
     });
 
     // Users

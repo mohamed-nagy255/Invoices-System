@@ -97,9 +97,9 @@
                                     @endcan
                                     @can('تقرير الفواتير')
                                         <li class="nav-item">
-                                            <a href="{{ route('report.index') }}"
-                                                class="nav-link pl-3 {{ request()->is('reports/invoices_report') ? 'nav-active' : '' }}">
-                                                <span class="ml-1 item-text">تقارير الفواتير</span>
+                                            <a href="{{ route('custemorReport.index') }}"
+                                                class="nav-link pl-3 {{ request()->is('reports/custemor_report') ? 'nav-active' : '' }}">
+                                                <span class="ml-1 item-text">تقارير العملاء</span>
                                             </a>
                                         </li>
                                     @endcan
