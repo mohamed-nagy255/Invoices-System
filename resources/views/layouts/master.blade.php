@@ -25,8 +25,6 @@
 
         @yield('content')
 
-        @include('layouts.modelNati')
-
     </div> <!-- .wrapper -->
 
     @include('layouts.footer-js')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\ExportInvoice;
 use App\Models\Invoice;
 use App\Models\Section;
@@ -12,8 +13,8 @@ use App\Notifications\AddInvoice;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Notification;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Notification;
 
 
 class InvoiceController extends Controller
@@ -115,6 +116,8 @@ class InvoiceController extends Controller
         }
         // $user = User::first();
         // Notification::send($user , new AddInvoice($invoice_id));
+        $user = User::first();
+        $user->notify(new AddInvoice($invoice_id));
         Notification::route('mail', 'mohamednagy767@gmail.com')->notify(new AddInvoice($invoice_id));;
         return redirect() -> route('invoice.insert') -> with('add', 'تم اضافة الفاتورة بنجاح');
     }

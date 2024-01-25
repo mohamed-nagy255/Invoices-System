@@ -108,7 +108,7 @@
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <span class="h2 mb-0">{{ $sections }}</span>
+                                        <span class="h2 mb-0">{{ $products }}</span>
                                         <p class="small text-muted mb-0">عدد المنتاجات</p>
                                     </div>
                                     <div class="col-auto">
@@ -123,7 +123,7 @@
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <span class="h2 mb-0">{{ $products }}</span>
+                                        <span class="h2 mb-0">{{ $sections }}</span>
                                         <p class="small text-muted mb-0">عدد الاقسام</p>
                                     </div>
                                     <div class="col-auto">
