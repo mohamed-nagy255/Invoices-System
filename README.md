@@ -22,3 +22,6 @@ Features:
         delete a service from the services provided by banks or delete the bank.
         
     8 - Notifications section: which shows notifications for newly added bills.
+
+    
+![screencapture-127-0-0-1-8000-2024-01-25-01_53_08](https://github.com/mohamed-nagy255/Invoices-System/assets/107279850/24fe57a9-4b4e-49bf-84b4-051a4bd08733)
